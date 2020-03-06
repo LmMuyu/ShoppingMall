@@ -41,13 +41,11 @@ const routes = [
 		path: "/login/",
 		name: "login",
 		component: Login,
-		children: [
-			{
-				path: "",
-				name: "startlogin",
-				component: startLogin
-			}
-		]
+	},
+	{
+		path: "/startling",
+		name: "startling",
+		component: startLogin
 	},
 	{
 		path: "/registered",

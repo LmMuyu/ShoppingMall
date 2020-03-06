@@ -1,10 +1,9 @@
 <template>
   <div class="logincomponent">
-    <login-back @click="login_back" />
+    <login-back />
     <div class="loginfrom">
       <el-form
         :model="ruleForm2"
-        status-icon
         :rules="rules2"
         ref="ruleForm2"
         class="demo-ruleForm"
@@ -67,7 +66,7 @@
 <script>
 import loginBack from "./loginBack";
 
-import { getVerification } from "network/login";
+import { getVerification, getRegisteredStart } from "network/login";
 import { loginmixin } from "common/mixin";
 
 export default {
@@ -111,8 +110,13 @@ export default {
     };
 
     var verificationCode = (rule, value, callback) => {
-      if (value !== "200216") {
-        callback(new Error("验证码错误!!"));
+      if (!value) {
+        callback(new Error("请输入验证码"));
+        return false;
+      }
+
+      if (value !== this.ruleForm2.code) {
+        callback(new Error("验证码错误"));
       } else {
         callback();
       }
@@ -136,7 +140,20 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$Notify({ type: "danger", message: "注册成功" });
+          /**
+           *username：用户名（邮箱）*
+           *password：密码*
+           *code：验证码*
+           */
+          let RegisteredParameter = {
+            username: this.ruleForm2.email,
+            password: this.ruleForm2.pass,
+            code: this.ruleForm2.code
+          };
+
+          getRegisteredStart(RegisteredParameter).then(res => {
+            this.$Notify({ type: "danger", message: res.message });
+          });
         } else {
           return false;
         }
@@ -155,13 +172,9 @@ export default {
       };
 
       getVerification(registeredData).then(res => {
-        console.log(res);
         //信息通知
         this.$Notify({ type: "primary", message: res.message });
       });
-    },
-    login_back() {
-      this.$router.back();
     }
   }
 };

@@ -1,9 +1,9 @@
 <template>
   <div class="logincomponent">
+    <login-back />
     <div class="loginfrom">
       <el-form
         :model="ruleForm2"
-        status-icon
         :rules="rules2"
         ref="ruleForm2"
         class="demo-ruleForm"
@@ -56,9 +56,14 @@
 <script>
 import { getLogin } from "network/login";
 
+import loginBack from "./loginBack";
+
 import { loginmixin } from "common/mixin";
 
 export default {
+  components: {
+    loginBack
+  },
   mixins: [loginmixin],
   data() {
     var verifyemail = (rule, value, callback) => {
@@ -125,7 +130,8 @@ export default {
       };
 
       getLogin(registeredData).then(res => {
-        console.log(res);
+        //信息通知
+        this.$Notify({ type: "primary", message: res.message });
       });
     }
   }
@@ -133,9 +139,6 @@ export default {
 </script>
 
 <style scoped>
-.logincomponent{
-  margin-top: 25px;
-}
 .yanz {
   margin-left: 25px;
 }
@@ -158,7 +161,8 @@ export default {
 .loginfrom {
   margin: 0 auto;
   background-color: #fff;
-  padding: 35px 35px 35px 35px;
+  padding: 35px 35px 35px 35px; 
+  margin-top: 25px;
 }
 .regis {
   display: block;

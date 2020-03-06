@@ -15,9 +15,17 @@ export default {
   components: {
     NavBar
   },
+  data() {
+    return {
+      path: ""
+    };
+  },
+  created() {
+    this.path = this.$route.path;
+  },
   methods: {
     loginback() {
-      this.$router.back();
+      this.$router.push(`${this.path === "/login" ? "/file" : "/login"}`);
     }
   }
 };

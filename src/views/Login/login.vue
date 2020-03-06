@@ -1,18 +1,15 @@
 <template>
   <div id="login">
-    <login-back />
     <LoginComponent />
   </div>
 </template>
 
 <script>
 import LoginComponent from "./subcomponents/LoginComponent";
-import loginBack from "./subcomponents/loginBack";
 
 export default {
   components: {
     LoginComponent,
-    loginBack
   }
 };
 </script>
