@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <keep-alive exclude="detail,login">
-      <router-view></router-view>
+    <keep-alive exclude="detail,startling,registered,login">
+      <router-view v-if="isRouterAlive"></router-view>
     </keep-alive>
     <tab-bar></tab-bar>
   </div>
@@ -14,6 +14,24 @@ export default {
   name: "app",
   components: {
     TabBar
+  },
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
+  data() {
+    return {
+      isRouterAlive: true
+    };
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function() {
+        this.isRouterAlive = true;
+      });
+    }
   }
 };
 </script>

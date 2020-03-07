@@ -10,53 +10,61 @@ const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
 
 const loginRegistered = () =>
-	import("views/Login/subcomponents/loginRegistered.vue");
+  import("views/Login/subcomponents/loginRegistered.vue");
 
 const routes = [
-	{
-		path: "",
-		redirect: "/home"
-	},
-	{
-		path: "/home",
-		name: "home",
-		component: Home
-	},
-	{
-		path: "/file",
-		name: "file",
-		component: File
-	},
-	{
-		path: "/detail/:iid",
-		name: "detail",
-		component: Detail
-	},
-	{
-		path: "/shoppingcart",
-		name: "shoppingcart",
-		component: ShoppingCart
-	},
-	{
-		path: "/login/",
-		name: "login",
-		component: Login,
-	},
-	{
-		path: "/startling",
-		name: "startling",
-		component: startLogin
-	},
-	{
-		path: "/registered",
-		name: "registered",
-		component: loginRegistered
-	}
+  {
+    path: "",
+    redirect: "/home"
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: Home
+  },
+  {
+    path: "/file",
+    name: "file",
+    component: File
+  },
+  {
+    path: "/detail/:iid",
+    name: "detail",
+    component: Detail
+  },
+  {
+    path: "/shoppingcart",
+    name: "shoppingcart",
+    component: ShoppingCart
+  },
+  {
+    path: "/login/",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/startling",
+    name: "startling",
+    component: startLogin
+  },
+  {
+    path: "/registered",
+    name: "registered",
+    component: loginRegistered
+  }
 ];
 
 const router = new VueRouter({
-	routes,
-	mode: "history"
+  routes,
+  mode: "history"
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login" && localStorage.getItem("user")) {
+    next(from);
+  }
+
+  next();
 });
 
 export default router;

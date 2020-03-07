@@ -2,7 +2,7 @@
   <div class="fileuserinfo">
     <div class="header">
       <span class="image">
-        <img src="~assets/images/fileUser.svg" alt />
+        <img :src="userInfo.avatar? userInfo.avatar:'~assets/images/fileUser.svg'" alt />
       </span>
     </div>
     <div class="flexes" @click="LoginJump">
@@ -21,6 +21,8 @@ import { mapGetters } from "vuex";
 export default {
   methods: {
     LoginJump() {
+      if (localStorage.getItem("user")) return false;
+
       this.$router.push("/login").catch(err => {
         err;
       });
@@ -69,6 +71,11 @@ export default {
   border-radius: 100%;
   margin-left: 15px;
   background-color: #e6e6e6;
+}
+.image img {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
 }
 .title {
   font-weight: bolder;

@@ -15,6 +15,7 @@ import fileSignOut from "./subcomponebts/fileSignOut";
 
 export default {
   name: "file",
+  inject:["reload"],
   data() {
     return {
       exithidden: true
@@ -34,7 +35,10 @@ export default {
       localStorage.removeItem("user");
       //点击退出后检查有没有删除成功
       if (!localStorage.getItem("user")) {
-        this.$Notify({ type: "primary", message: "删除成功" });
+        this.$Notify({ type: "primary", message: "退出成功" });
+        this.reload()
+      }else{
+        this.$Notify({ type: "primary", message: "网络异常" });
       }
     },
     isexithidden() {

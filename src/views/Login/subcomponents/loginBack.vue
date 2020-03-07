@@ -4,6 +4,7 @@
       <div slot="left" class="left" @click="loginback">
         <img src="~assets/images/detailnavbarleft.svg" alt />
       </div>
+      <div slot="center">{{logreg}}</div>
     </nav-bar>
   </div>
 </template>
@@ -26,6 +27,13 @@ export default {
   methods: {
     loginback() {
       this.$router.push(`${this.path === "/login" ? "/file" : "/login"}`);
+    }
+  },
+  computed: {
+    logreg() {
+      let path = this.$route.path;
+      let titles = path === "/login" ? "登录" : "注册";
+      return titles;
     }
   }
 };
