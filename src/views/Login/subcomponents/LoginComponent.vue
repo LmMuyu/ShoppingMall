@@ -151,8 +151,10 @@ export default {
                 phone: "1538993458",
                 token: res.data.token
               };
-
+              //将用户信息储存到Vuex上
               this.$store.commit("clearfix", userData);
+              //跳转file页面
+              this.$router.replace("/file")
             }
             this.$Notify({ type: "primary", message: res.message });
           });

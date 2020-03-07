@@ -6,16 +6,18 @@
       </span>
     </div>
     <div class="flexes" @click="LoginJump">
-      <div class="title">点击登录</div>
-      <div class="font">暂无手机号</div>
+      <div class="title">{{userInfo.username? userInfo.username:"点击登录" }}</div>
+      <div class="font">手机号:{{userInfo.phone? userInfo.phone:""}}</div>
     </div>
     <div class="identity">
-      <span>未实名</span>
+      <span>状态:{{userInfo.RealNameVerification ? "以实名":"未实名"}}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   methods: {
     LoginJump() {
@@ -23,6 +25,9 @@ export default {
         err;
       });
     }
+  },
+  computed: {
+    ...mapGetters(["userInfo"])
   }
 };
 </script>

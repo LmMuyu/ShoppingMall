@@ -18,6 +18,7 @@ export default {};
 }
 .signout {
   border: none;
-  background-color: #ffffff
+  background-color: #ffffff;
+  color: red;
 }
 </style>
