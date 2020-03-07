@@ -8,6 +8,7 @@ const Login = () => import("views/Login/login");
 const Detail = () => import("views/detail/Detail");
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
+const Category = ()=> import("../views/category/category.vue") 
 
 const loginRegistered = () =>
   import("views/Login/subcomponents/loginRegistered.vue");
@@ -31,6 +32,11 @@ const routes = [
     path: "/detail/:iid",
     name: "detail",
     component: Detail
+  },
+  {
+    path:"/category",
+    name:"category",
+    component:Category
   },
   {
     path: "/shoppingcart",
