@@ -63,7 +63,7 @@ export default {
       recommend: [],
       themeTopYs: [], //滚到内容组件的位置:Y值
       themeTopy: null,
-      indexis: 0,
+      indexis: 0, //滚动
       arr: []
     };
   },
@@ -137,6 +137,8 @@ export default {
     scrolltoys(index) {
       //点击标签滚到指定位置
       this.$refs.scroll.scroll.scrollTo(0, -this.themeTopYs[index], 1200);
+
+      console.log(this.themeTopYs);
     },
     monitores(position) {
       const navYs = -position;
