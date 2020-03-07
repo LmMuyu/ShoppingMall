@@ -14,7 +14,7 @@ export default {
   priceLess(_state, payload) {
     payload.count--;
   },
-  clearfix(state, payload) {
-    state.user = payload;
+  clearfix(_state, payload) {
+    localStorage.setItem("user",JSON.stringify(payload))
   }
 };

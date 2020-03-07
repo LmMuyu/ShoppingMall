@@ -8,8 +8,7 @@ Vue.use(Vuex);
 
 let state = {
   goodslist: [], //购物车商品
-  user: null, //用户信息
-  token: "" //用户的token
+  user: JSON.parse(localStorage.getItem("user")) || false //用户信息
 };
 
 export default new Vuex.Store({

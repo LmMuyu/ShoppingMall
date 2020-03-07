@@ -142,21 +142,19 @@ export default {
           getLoginStart(loginParameter).then(res => {
             console.log(res);
 
-            if (res.resCode !== 0) {
-              this.$Notify({ type: "primary", message: res.message });
-            } else {
+            if (res.resCode === 0) {
               let userData = {
                 username: res.data.username,
                 avatar:
                   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583565648703&di=1b814d41ea84531fe5861fb2f3671b2f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F0dd7912397dda144dac4acc9b2b7d0a20df486f8.jpg",
                 RealNameVerification: false,
-                phone: "1538993458"
+                phone: "1538993458",
+                token: res.data.token
               };
 
               this.$store.commit("clearfix", userData);
-
-              this.$Notify({ type: "primary", message: res.message });
             }
+            this.$Notify({ type: "primary", message: res.message });
           });
         } else {
           return false;
