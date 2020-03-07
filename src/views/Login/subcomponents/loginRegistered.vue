@@ -10,35 +10,44 @@
         :inline-message="true"
         size="mini"
       >
-        <el-form-item label="邮箱" prop="email">
+        <el-form-item prop="email">
           <el-input
             v-model="ruleForm2.email"
             prefix-icon="el-icon-message"
             auto-complete="off"
             clearable
             @input="inputEnter"
+            placeholder="输入邮箱"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="pass">
+        <el-form-item prop="pass">
           <el-input
             type="password"
             prefix-icon="el-icon-edit"
             v-model="ruleForm2.pass"
             clearable
             auto-complete="off"
+            placeholder="输入密码"
           ></el-input>
         </el-form-item>
-        <el-form-item label="确定密码" prop="checkPass">
+        <el-form-item prop="checkPass">
           <el-input
             type="password"
             prefix-icon="el-icon-edit"
             v-model="ruleForm2.checkPass"
             clearable
             auto-complete="off"
+            placeholder="确定密码"
           ></el-input>
         </el-form-item>
         <el-form-item prop="code" class="faot">
-          <el-input v-model="ruleForm2.code" auto-complete="off" clearable class="isleft"></el-input>
+          <el-input
+            v-model="ruleForm2.code"
+            auto-complete="off"
+            clearable
+            class="isleft"
+            maxlength="6"
+          ></el-input>
           <van-button
             class="yanz"
             @click.prevent="sendCode"
@@ -103,7 +112,7 @@ export default {
       if (value === "") {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.ruleForm2.pass) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error("两次输入密码不一致"));
       } else {
         callback();
       }
@@ -197,7 +206,7 @@ export default {
   margin-left: 25px;
 }
 .isleft {
-  width: 80px;
+  width: 90px;
 }
 .submit {
   width: 100%;

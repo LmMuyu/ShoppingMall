@@ -26,3 +26,12 @@ export function getRegisteredStart(data) {
     data
   });
 }
+
+export function getLoginStart(data) {
+  //注册
+  return verification({
+    method: "post",
+    url: "/login/",
+    data
+  });
+}

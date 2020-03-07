@@ -10,25 +10,33 @@
         :inline-message="true"
         size="mini"
       >
-        <el-form-item label="邮箱" prop="email">
+        <el-form-item prop="email">
           <el-input
             v-model="ruleForm2.email"
             prefix-icon="el-icon-message"
             auto-complete="off"
             clearable
             @input="inputEnter"
+            placeholder="输入邮箱"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="pass">
+        <el-form-item prop="pass">
           <el-input
             type="password"
             prefix-icon="el-icon-edit"
             v-model="ruleForm2.pass"
             clearableauto-complete="off"
+            placeholder="输入密码"
           ></el-input>
         </el-form-item>
         <el-form-item prop="code" class="faot">
-          <el-input v-model="ruleForm2.code" auto-complete="off" clearable class="isleft"></el-input>
+          <el-input
+            v-model="ruleForm2.code"
+            auto-complete="off"
+            clearable
+            class="isleft"
+            maxlength="6"
+          ></el-input>
           <van-button
             class="yanz"
             @click.prevent="sendCode"
@@ -54,7 +62,7 @@
 </template>
 
 <script>
-import { getLogin } from "network/login";
+import { getLogin, getLoginStart } from "network/login";
 
 import loginBack from "./loginBack";
 
@@ -91,8 +99,13 @@ export default {
     };
 
     var verificationCode = (rule, value, callback) => {
-      if (value !== "200216") {
-        callback(new Error("验证码错误!!"));
+      if (!value) {
+        callback(new Error("请输入验证码"));
+        return false;
+      }
+
+      if (value !== this.ruleForm2.code) {
+        callback(new Error("验证码错误"));
       } else {
         callback();
       }
@@ -114,7 +127,37 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$Notify({ type: "danger", message: "登录成功" });
+          /**
+           * username：用户名（邮箱）*
+           *password：密码*
+           *code：验证码*
+           */
+
+          let loginParameter = {
+            username: this.ruleForm2.email,
+            password: this.ruleForm2.pass,
+            code: this.ruleForm2.code
+          };
+
+          getLoginStart(loginParameter).then(res => {
+            console.log(res);
+
+            if (res.resCode !== 0) {
+              this.$Notify({ type: "primary", message: res.message });
+            } else {
+              let userData = {
+                username: res.data.username,
+                avatar:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583565648703&di=1b814d41ea84531fe5861fb2f3671b2f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F0dd7912397dda144dac4acc9b2b7d0a20df486f8.jpg",
+                RealNameVerification: false,
+                phone: "1538993458"
+              };
+
+              this.$store.commit("clearfix", userData);
+
+              this.$Notify({ type: "primary", message: res.message });
+            }
+          });
         } else {
           return false;
         }
@@ -150,7 +193,7 @@ export default {
   margin-left: 25px;
 }
 .isleft {
-  width: 80px;
+  width: 90px;
 }
 .submit {
   width: 100%;
@@ -161,7 +204,7 @@ export default {
 .loginfrom {
   margin: 0 auto;
   background-color: #fff;
-  padding: 35px 35px 35px 35px; 
+  padding: 35px 35px 35px 35px;
   margin-top: 25px;
 }
 .regis {
@@ -172,9 +215,5 @@ export default {
   float: none;
   color: red;
   font-size: 14px;
-}
-.borders {
-  border: 1px solid red;
-  border-radius: 5px;
 }
 </style>

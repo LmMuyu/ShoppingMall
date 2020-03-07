@@ -7,13 +7,15 @@ import getters from "./getters";
 Vue.use(Vuex);
 
 let state = {
-	goodslist: [] //购物车商品
+  goodslist: [], //购物车商品
+  user: null, //用户信息
+  token: "" //用户的token
 };
 
 export default new Vuex.Store({
-	state,
-	mutations,
-	actions,
-	getters,
-	modules: {}
+  state,
+  mutations,
+  actions,
+  getters,
+  modules: {}
 });

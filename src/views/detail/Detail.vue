@@ -1,26 +1,24 @@
 <template>
-  <div @load="isimageLoad">
-    <transition
-      name="custom-classes-transition"
-      leave-active-class="bouncelnRight-leave"
-      enter-active-class="bouncelnLeft-enter"
-    >
-      <div class="detail">
-        <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
-        <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
-          <detail-swiper :swiperimg="itemInfo" />
-          <detail-display-bar :goods="isgoods" />
-          <detail-information :business="business" />
-          <detail-goods-info :detailImage="detailImage" :desc="desc" @isimage="imageLoad" />
-          <detail-parameters ref="parameters" :parameters="parameters" :comment="comment" />
-          <comment ref="comment" :comment="comment" />
-          <goods-list ref="recommend" :goods="recommend" />
-        </scroll>
-        <back-top @click.native="backclick" v-show="show" class="backtop" />
-        <goods-action @shopping="addshopping" class="action" />
-      </div>
-    </transition>
-  </div>
+  <transition
+    name="custom-classes-transition"
+    leave-active-class="bouncelnRight-leave"
+    enter-active-class="bouncelnLeft-enter"
+  >
+    <div class="detail">
+      <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
+      <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
+        <detail-swiper :swiperimg="itemInfo" />
+        <detail-display-bar :goods="isgoods" />
+        <detail-information :business="business" />
+        <detail-goods-info :detailImage="detailImage" :desc="desc" @isimage="imageLoad" />
+        <detail-parameters ref="parameters" :parameters="parameters" :comment="comment" />
+        <comment ref="comment" :comment="comment" />
+        <goods-list ref="recommend" :goods="recommend" />
+      </scroll>
+      <back-top @click.native="backclick" v-show="show" class="backtop" />
+      <goods-action @shopping="addshopping" class="action" />
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -130,15 +128,13 @@ export default {
       //防抖处理
       const implement = debounce(this.$refs.scroll.refresh, 100);
       implement();
-    },
-    isimageLoad() {
+
+      //每刷新一张照片获取一次高度
       this.themeTopy();
     },
     scrolltoys(index) {
       //点击标签滚到指定位置
       this.$refs.scroll.scroll.scrollTo(0, -this.themeTopYs[index], 1200);
-
-      console.log(this.themeTopYs);
     },
     monitores(position) {
       const navYs = -position;
@@ -153,8 +149,11 @@ export default {
           this.$refs.nav.isindex = i;
         }
       }
+
+      //返回顶部图标隐藏或显示
       position < -300 ? (this.show = true) : (this.show = false);
     },
+    //加入购物车获取单个商品参数
     addshopping() {
       const goodsdata = {};
 
