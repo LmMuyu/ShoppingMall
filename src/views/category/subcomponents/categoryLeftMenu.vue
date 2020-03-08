@@ -1,10 +1,10 @@
 <template>
   <div class="menu">
     <div class="width">
-      <Menu theme="light" width="110px" class="lightmenu">
+      <Menu theme="light" :active-name="name" width="auto" class="lightmenu">
         <scroll ref="scroll" class="scroll">
-          <MenuItem :name="index+1" v-for="(item, index) in categoryTitle" :key="index">
-            <span class="titlese">{{item.title}}</span>
+          <MenuItem v-for="(item, index) in categoryTitle" :key="index" :name="index+1">
+            <span @click="cliacktitle(item.maitKey)">{{item.title}}</span>
           </MenuItem>
         </scroll>
       </Menu>
@@ -15,12 +15,19 @@
 <script>
 import Scroll from "components/content/scroll/Scroll";
 
+import { getSubcategory } from "network/category";
+
 export default {
   components: {
     Scroll
   },
   data() {
-    return {};
+    return {
+      name: null,
+      category: {
+        // isPopular
+      }
+    };
   },
   props: {
     categoryTitle: {
@@ -31,9 +38,16 @@ export default {
     }
   },
   methods: {
-    cliacktitle() {
-      console.log(123456);
+    cliacktitle(maitKey) {
+      console.log(maitKey);
+
+      getSubcategory(maitKey).then(res => {
+        console.log(res);
+      });
     }
+  },
+  updated() {
+    this.name = 1;
   }
 };
 </script>
@@ -42,7 +56,7 @@ export default {
 .width {
   height: 100%;
   width: 110px;
-  visibility: visible;
+  overflow: hidden;
 }
 .lightmenu span {
   font-size: 14px;
@@ -51,8 +65,8 @@ export default {
 .scroll {
   height: calc(100vh - 49px - 50px);
 }
-/* .titlese {
-  position: relative;
-  z-index: -99;
-} */
+.menu{
+  width: 110px;
+  display: inline-block;
+}
 </style>

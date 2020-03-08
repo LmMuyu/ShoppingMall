@@ -2,7 +2,7 @@
   <div class="fileuserinfo">
     <div class="header">
       <span class="image">
-        <img :src="userInfo.avatar? userInfo.avatar:'~assets/images/fileUser.svg'"  />
+        <img :src="userInfo.avatar? userInfo.avatar:'../../../assets/images/login/loginPassword.svg'"  />
       </span>
     </div>
     <div class="flexes" @click="LoginJump">
