@@ -9,6 +9,7 @@ import { Search } from "vant";
 import { Card } from "vant";
 import { Notify } from "vant";
 import { Button } from 'vant';
+import { Col, Row } from 'vant';
 
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
@@ -23,5 +24,7 @@ Vue.use(Search);
 Vue.use(Swipe);
 Vue.use(Vant);
 Vue.use(Card);
+Vue.use(Col);
+Vue.use(Row);
 
 Vue.prototype.$Notify = Notify;

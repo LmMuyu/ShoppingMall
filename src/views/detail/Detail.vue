@@ -1,8 +1,8 @@
 <template>
   <transition
     name="custom-classes-transition"
-    leave-active-class="bouncelnRight-leave"
-    enter-active-class="bouncelnLeft-enter"
+    leave-active-class="animate bouncelnRight-leave"
+    enter-active-class="animate bouncelnLeft-enter"
   >
     <div class="detail">
       <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
@@ -174,7 +174,7 @@ export default {
 <style scoped>
 .detail {
   position: relative;
-  z-index: 9;
+  z-index: 9999999;
   background-color: #ffffff;
   height: 100vh;
 }
@@ -183,13 +183,13 @@ export default {
 }
 .isnavbar {
   position: relative;
-  z-index: 10;
+  z-index: 999999;
 }
 .backtop {
   margin-bottom: 15px;
 }
 .action {
   position: relative;
-  z-index: 10;
+  z-index: 999999;
 }
 </style>

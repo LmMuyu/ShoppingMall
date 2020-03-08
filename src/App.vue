@@ -3,7 +3,7 @@
     <keep-alive exclude="detail,startling,registered,login">
       <router-view v-if="isRouterAlive"></router-view>
     </keep-alive>
-    <tab-bar></tab-bar>
+    <tab-bar class="tabbar"></tab-bar>
   </div>
 </template>
 
@@ -37,6 +37,11 @@ export default {
 </script>
 
 <style>
+.tabbar {
+  position: relative;
+  z-index: 9999;
+}
+
 @import "~assets/css/baess.css";
 @import "~assets/css/normalize.css";
 </style>

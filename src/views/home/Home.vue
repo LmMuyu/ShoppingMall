@@ -2,7 +2,7 @@
   <div class="home">
     <nav-bar class="navbar">
       <div slot="center">
-        <van-search v-model="searchFor" shape="round" background="#f8beb3" class="text" />
+        <Input search placeholder="搜索商品" size="default" v-model="searchFor" />
       </div>
     </nav-bar>
     <tab-control
@@ -78,7 +78,8 @@ export default {
       topoffsetTop: 0, //储存组件TabControl的offsetTop
       topnav: false, //储存吸顶效果的状态
       saveY: 0, //储存Y值
-      searchFor: "" //搜索栏值
+      searchFor: "", //搜索栏值
+
     };
   },
   created() {
