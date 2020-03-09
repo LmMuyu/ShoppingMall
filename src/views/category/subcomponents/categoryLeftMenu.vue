@@ -3,8 +3,8 @@
     <div class="width">
       <Menu theme="light" :active-name="name" width="auto" class="lightmenu">
         <scroll ref="scroll" class="scroll">
-          <MenuItem v-for="(item, index) in categoryTitle" :key="index" :name="index+1">
-            <span @click="cliacktitle(item.maitKey)">{{item.title}}</span>
+          <MenuItem v-for="(item, index) in categoryTitle" :key="index" :name="index+1" class="menuitem">
+            <span>{{item.title}}</span>
           </MenuItem>
         </scroll>
       </Menu>
@@ -15,7 +15,6 @@
 <script>
 import Scroll from "components/content/scroll/Scroll";
 
-import { getSubcategory } from "network/category";
 
 export default {
   components: {
@@ -23,10 +22,7 @@ export default {
   },
   data() {
     return {
-      name: null,
-      category: {
-        // isPopular
-      }
+      name: null
     };
   },
   props: {
@@ -38,13 +34,6 @@ export default {
     }
   },
   methods: {
-    cliacktitle(maitKey) {
-      console.log(maitKey);
-
-      getSubcategory(maitKey).then(res => {
-        console.log(res);
-      });
-    }
   },
   updated() {
     this.name = 1;
@@ -68,5 +57,8 @@ export default {
 .menu{
   width: 110px;
   display: inline-block;
+}
+.menuitem{
+  border-bottom: 1px solid rgb(240, 240, 240);
 }
 </style>
