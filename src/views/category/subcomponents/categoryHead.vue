@@ -4,7 +4,7 @@
       <div slot="left" v-ripple class="left">
         <Icon type="ios-menu" size="32" color="#ffffff" class="iosmenu" />
       </div>
-      <div slot="center">
+      <div slot="center" @click="search">
         <Input icon="ios-search" placeholder="搜索商品" size="default" />
       </div>
       <div slot="right" v-ripple class="right">
@@ -32,9 +32,12 @@ export default {
     AppBar
   },
   data() {
-    return {
-     
-    };
+    return {};
+  },
+  methods: {
+    search() {
+      this.$emit("searchfor");
+    }
   }
 };
 </script>
@@ -49,7 +52,7 @@ export default {
   width: 100%;
   height: 49px;
 }
-.left{
+.left {
   width: 100%;
   height: 49px;
 }

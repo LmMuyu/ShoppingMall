@@ -1,6 +1,6 @@
 <template>
   <div ref="wrapper" class="wrapper">
-    <div class="scroll">
+    <div class="content">
       <slot></slot>
     </div>
   </div>

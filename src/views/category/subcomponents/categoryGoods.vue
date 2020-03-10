@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="isgoods">
+    <Divider orientation="center" class="leftitem">{{categoryleftmenudata.categorytitle}}</Divider>
     <category-goods-show
-      v-for="(item, index) in showgoods.titletotal"
+      v-for="(item, index) in categoryleftmenudata.categoryleftmenudata"
       :key="index"
-      :showgoods="showgoods.categoryShowGoods"
-      :title="item"
+      :showdata="item"
     />
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
     categoryGoodsShow
   },
   props: {
-    showgoods: {
+    categoryleftmenudata: {
       type: Object,
       default() {
         return {};
@@ -28,4 +28,9 @@ export default {
 </script>
 
 <style scoped>
+.isgoods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 </style>

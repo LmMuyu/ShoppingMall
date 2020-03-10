@@ -3,9 +3,11 @@
     <div class="width">
       <Menu theme="light" :active-name="name" width="auto" class="lightmenu">
         <scroll ref="scroll" class="scroll">
-          <MenuItem v-for="(item, index) in categoryTitle" :key="index" :name="index+1" class="menuitem">
-            <span>{{item.title}}</span>
-          </MenuItem>
+          <div v-for="(item, index) in categoryTitle" :key="index" class="menuitem">
+            <MenuItem :name="index+1">
+              <div @click="maitkeyindex(item.maitKey,index)" class="titles">{{item.title}}</div>
+            </MenuItem>
+          </div>
         </scroll>
       </Menu>
     </div>
@@ -14,7 +16,6 @@
 
 <script>
 import Scroll from "components/content/scroll/Scroll";
-
 
 export default {
   components: {
@@ -34,6 +35,9 @@ export default {
     }
   },
   methods: {
+    maitkeyindex(maitkey, index) {
+      this.$emit("menuvlaue", maitkey, index);
+    }
   },
   updated() {
     this.name = 1;
@@ -54,11 +58,17 @@ export default {
 .scroll {
   height: calc(100vh - 49px - 50px);
 }
-.menu{
+.menu {
   width: 110px;
   display: inline-block;
 }
-.menuitem{
+.menuitem {
   border-bottom: 1px solid rgb(240, 240, 240);
+}
+.titles{
+  padding: 16px;
+}
+.ivu-menu-item{
+  padding: 0;
 }
 </style>

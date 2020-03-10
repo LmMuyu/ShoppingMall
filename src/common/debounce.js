@@ -5,16 +5,16 @@
  */
 
 export function debounce(func, delay) {
-	let timer = null;
+  let timer = null;
 
-	return function(...args) {
-		if (timer) {
-			clearTimeout(timer); //判断timer有没有值,有就清除
-		} 
+  return function(...args) {
+    if (timer) {
+      clearTimeout(timer); //判断timer有没有值,有就清除
+    }
 
-		// eslint-disable-next-line no-const-assign
-		timer = setTimeout(() => {
-			func.apply(this, args);
-		}, delay);
-	};
+    // eslint-disable-next-line no-const-assign
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
 }

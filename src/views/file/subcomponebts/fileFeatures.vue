@@ -1,6 +1,6 @@
 <template>
   <div class="filefeatures">
-    <div class="features">
+    <div class="features" v-ripple>
       <span class="favorite">
         <img src="~assets/images/fileOrder.svg" alt />
         <span class="font">订单</span>
@@ -9,7 +9,7 @@
         <img src="~assets/images/arrow.svg" alt />
       </span>
     </div>
-    <div class="features">
+    <div class="features" v-ripple>
       <span class="favorite">
         <img src="~assets/images/fileFavorite.svg" alt />
         <span class="font">收藏</span>
@@ -18,7 +18,7 @@
         <img src="~assets/images/arrow.svg" alt />
       </span>
     </div>
-    <div class="features">
+    <div class="features" v-ripple>
       <span class="favorite">
         <img src="~assets/images/fileHistory.svg" alt />
         <span class="font">历史记录</span>
@@ -27,7 +27,7 @@
         <img src="~assets/images/arrow.svg" alt />
       </span>
     </div>
-    <div class="features">
+    <div class="features" v-ripple>
       <span class="favorite">
         <img src="~assets/images/fileCustomerService.svg" alt />
         <span class="font">客服</span>
@@ -36,7 +36,7 @@
         <img src="~assets/images/arrow.svg" alt />
       </span>
     </div>
-     <div class="features">
+    <div class="features" v-ripple>
       <span class="favorite">
         <img src="~assets/images/fileFeedback.svg" alt />
         <span class="font">意见和反馈</span>

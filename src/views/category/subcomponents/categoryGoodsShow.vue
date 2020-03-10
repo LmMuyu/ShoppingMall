@@ -1,53 +1,43 @@
 <template>
   <div class="categorygoodsshow">
-    <Divider orientation="left" class="leftitem">{{title}}</Divider>
-    <div class="divider" v-for="(item, index) in showgoods" :key="index">
-      <Card style="width:60px">
-        <div style="text-align:center" class="card">
-          <img v-lazy="item.image" />
-        </div>
-      </Card>
-    </div>
+    <v-card :loading="loading" class="mx-auto my-12" width="120">
+      <v-img height="100" :src="showdata.image" @load="imageload"></v-img>
+      <v-card-text>{{showdata.title}}</v-card-text>
+    </v-card>
   </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    loading: false,
+    selection: 1
+  }),
   components: {},
   props: {
-    showgoods: {
-      type: Array,
+    showdata: {
+      type: Object,
       default() {
-        return [];
-      }
-    },
-    title: {
-      type: String,
-      default() {
-        return "";
+        return {};
       }
     }
   },
-  data() {
-    return {};
-  },
-  methods: {}
+  methods: {
+    reserve() {
+      this.loading = true;
+
+      setTimeout(() => (this.loading = false), 2000);
+    },
+    imageload() {
+      this.$bus.$emit("imageload");
+    }
+  }
 };
 </script>
 
 <style scoped>
 .categorygoodsshow {
-  display: flex;
-  flex-wrap: wrap;
-}
-.leftitem {
-  font-size: 13px;
-}
-.card img {
-  width: 30px;
-  height: 30px;
-}
-.divider {
-  margin: 0 4px;
+  text-align: center;
+  margin: 5px;
 }
 </style>

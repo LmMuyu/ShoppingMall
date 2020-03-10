@@ -8,10 +8,12 @@ const Login = () => import("views/Login/login");
 const Detail = () => import("views/detail/Detail");
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
-const Category = ()=> import("../views/category/category.vue") 
+const Category = () => import("views/category/category.vue");
+const CategorySearchFor = () =>
+  import("components/content/searchfor/searchFor.vue");
 
 const loginRegistered = () =>
-  import("views/Login/subcomponents/loginRegistered.vue");
+  import("views/Login/subcomponents/loginRegistered");
 
 const routes = [
   {
@@ -34,9 +36,16 @@ const routes = [
     component: Detail
   },
   {
-    path:"/category",
-    name:"category",
-    component:Category
+    path: "/category",
+    name: "category",
+    component: Category,
+    children: [
+      {
+        path: "searchfor",
+        name: "searchfor",
+        component: CategorySearchFor
+      }
+    ]
   },
   {
     path: "/shoppingcart",
