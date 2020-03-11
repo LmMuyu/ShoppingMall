@@ -24,7 +24,7 @@
 <script>
 import AppBar from "components/common/appbar/AppBar";
 
-import { SEARCHHISTORY } from "../../../store/murations-types";
+import { SEARCHHISTORY } from "@/store/murations-types";
 
 export default {
   components: {
@@ -41,7 +41,8 @@ export default {
       this.$router.back();
     },
     searchFor() {
-      this.$store.dispatch(SEARCHHISTORY,this.value);
+      this.$store.dispatch(SEARCHHISTORY, this.value);
+      this.value = ""
     }
   }
 };

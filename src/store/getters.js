@@ -30,5 +30,8 @@ export default {
   },
   userInfo(state) {
     return state.user;
+  },
+  historyRecord(state) {
+    return state.searchHistory;
   }
 };

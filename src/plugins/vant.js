@@ -11,6 +11,7 @@ import { Search } from "vant";
 import { Notify } from "vant";
 import { Button } from "vant";
 import { Card } from "vant";
+import { Dialog } from "vant";
 
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
@@ -24,6 +25,7 @@ Vue.use(Checkbox);
 Vue.use(Tabbar);
 Vue.use(Button);
 Vue.use(Search);
+Vue.use(Dialog);
 Vue.use(Swipe);
 Vue.use(Card);
 Vue.use(Vant);

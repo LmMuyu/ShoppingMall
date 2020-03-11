@@ -1,4 +1,4 @@
-import { SEARCHHISTORY, HISTORY } from "./murations-types";
+import { SEARCHHISTORY } from "./murations-types.js";
 
 export default {
   addcart(context, payload) {
@@ -33,8 +33,9 @@ export default {
     }
   },
   [SEARCHHISTORY](context, payload) {
-    let history = context.state.searchHistory.push(payload);
+    let hisrecord = context.state.searchHistory;
+    hisrecord.push(payload);
 
-    context.commit(HISTORY, history);
+    context.commit(SEARCHHISTORY, hisrecord);
   }
 };
