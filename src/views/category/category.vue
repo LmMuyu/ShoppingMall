@@ -1,12 +1,16 @@
 <template>
   <div id="category">
-    <router-view></router-view>
-    <category-head class="categoryhead" @searchfor="isSearchfor" />
-    <category-left-menu :categoryTitle="categoryTitle" @menuvlaue="vlaueidnex" class="leftmenu" />
-    <scroll class="scroll" ref="scroll">
-      <category-swiper />
-      <category-goods class="isgoods" :categoryleftmenudata="categoryShowGoods" />
-    </scroll>
+    <div v-if="classification">
+      <category-head class="categoryhead" @searchfor="isSearchfor" />
+      <category-left-menu :categoryTitle="categoryTitle" @menuvlaue="vlaueidnex" class="leftmenu" />
+      <scroll class="scroll" ref="scroll">
+        <category-swiper />
+        <category-goods class="isgoods" :categoryleftmenudata="categoryShowGoods" />
+      </scroll>
+    </div>
+    <div v-else>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -36,7 +40,8 @@ export default {
         //分类数据
         categorytitle: "",
         categoryleftmenudata: []
-      }
+      },
+      classification: true
     };
   },
   created() {
@@ -61,6 +66,7 @@ export default {
     },
     isSearchfor() {
       this.$router.push("category/searchfor");
+      this.classification = false;
     }
   },
   mounted() {
@@ -68,6 +74,10 @@ export default {
       let imgload = debounce(this.$refs.scroll.refresh, 150);
 
       imgload();
+    });
+
+    this.$bus.$on("statuschange", () => {
+      this.classification = true;
     });
   },
   watch: {

@@ -140,7 +140,7 @@ export default {
           };
 
           getLoginStart(loginParameter).then(res => {
-            console.log(res);
+            // console.log(res);
 
             if (res.resCode === 0) {
               let userData = {
@@ -154,7 +154,7 @@ export default {
               //将用户信息储存到Vuex上
               this.$store.commit("clearfix", userData);
               //跳转file页面
-              this.$router.replace("/file")
+              this.$router.replace("/file");
             }
             this.$Notify({ type: "primary", message: res.message });
           });

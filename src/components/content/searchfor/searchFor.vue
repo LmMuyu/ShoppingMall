@@ -1,7 +1,7 @@
 <template>
   <div class="searchfor">
     <search-bar />
-    <recordHistory />
+    <recordHistory class="isrecord"/>
   </div>
 </template>
 
@@ -20,8 +20,12 @@ export default {
 <style scoped>
 .searchfor {
   height: 100vh;
+  width: 100%;
   position: relative;
   background-color: #ffffff;
   z-index: 10000;
+}
+.isrecord{
+  float: left;
 }
 </style>

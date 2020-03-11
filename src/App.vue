@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive exclude="detail,startling,registered,login">
+    <keep-alive exclude="detail,startling,registered,login,searchfor">
       <router-view v-if="isRouterAlive"></router-view>
     </keep-alive>
     <tab-bar class="tabbar"></tab-bar>
@@ -24,6 +24,9 @@ export default {
     return {
       isRouterAlive: true
     };
+  },
+  created() {
+    this.$router.push("/home");
   },
   methods: {
     reload() {

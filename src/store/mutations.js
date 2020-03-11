@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import { HISTORY } from "./murations-types";
+
 export default {
   islistdata(_state, payload) {
     payload.count++;
@@ -15,6 +17,9 @@ export default {
     payload.count--;
   },
   clearfix(_state, payload) {
-    localStorage.setItem("user",JSON.stringify(payload))
+    localStorage.setItem("user", JSON.stringify(payload));
+  },
+  [HISTORY](_state, payload) {
+    localStorage.setItem("search", JSON.stringify(payload));
   }
 };

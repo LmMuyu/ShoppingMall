@@ -1,14 +1,21 @@
 <template>
   <div>
-    <app-bar :leftspan="5" :centerspan="19" :rightspan="0">
+    <app-bar :leftspan="4" :centerspan="17" :rightspan="3">
       <div slot="left" class="left" @click="returns">
         <img src="~assets/images/category/categorydetail.svg" alt />
         <span>返回</span>
       </div>
-      <div slot="center">
-        <van-search class="form" :disabled="true" v-model="value" show-action shape="round" placeholder="请输入搜索关键词">
-          <div slot="action" @click="search" class="action">取消</div>
-        </van-search>
+      <div slot="center" class="center">
+        <van-search
+          class="form"
+          v-model="value"
+          shape="round"
+          placeholder="请输入搜索关键词"
+          @keydown.enter="searchFor"
+        ></van-search>
+      </div>
+      <div slot="right" class="left">
+        <div @click="returns" class="action">取消</div>
       </div>
     </app-bar>
   </div>
@@ -17,22 +24,24 @@
 <script>
 import AppBar from "components/common/appbar/AppBar";
 
+import { SEARCHHISTORY } from "../../../store/murations-types";
+
 export default {
   components: {
     AppBar
   },
   data() {
     return {
-      value: "",
-      true: true
+      value: ""
     };
   },
   methods: {
     returns() {
+      this.$bus.$emit("statuschange");
       this.$router.back();
     },
-    search() {
-      this.$router.back();
+    searchFor() {
+      this.$store.dispatch(SEARCHHISTORY,this.value);
     }
   }
 };
@@ -47,9 +56,10 @@ export default {
   display: flex;
   align-items: center;
   color: #f0f0f0;
+  width: auto;
 }
 .left img {
-  margin-left: 12px;
+  margin-left: 3px;
 }
 .form {
   background-color: #30336b;
@@ -57,5 +67,8 @@ export default {
 }
 .action {
   color: #f0f0f0;
+}
+.center {
+  margin-bottom: 24px;
 }
 </style>

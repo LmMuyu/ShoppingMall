@@ -1,15 +1,16 @@
 <template>
   <div class="historyrecord">
     <Divider orientation="left" class="leftitem">历史记录</Divider>
-
-    <span>4566464444</span>
-    <span>456646awddaw4</span>
-    <span>45664awaddd64</span>
-    <span>45664dawdaadaw64</span>
-    <span>456646daw4</span>
-    <span>45664dwda64</span>
-    <span>4566464</span>
-    <span>4566464</span>
+    <div class="historyrecord">
+      <span>4566464444</span>
+      <span>456646awddaw4</span>
+      <span>45664awaddd64</span>
+      <span>45664dawdaadaw64</span>
+      <span>456646daw4</span>
+      <span>45664dwda64</span>
+      <span>4566464</span>
+      <span>4566464</span>
+    </div>
   </div>
 </template>
 
@@ -22,8 +23,13 @@ export default {};
   display: flex;
   flex-wrap: wrap;
 }
-.leftitem{
+.leftitem {
   color: #000;
   font-weight: bold;
+}
+.historyrecord span {
+  margin: 8px;
+  padding: 6px;
+  background-color: #E0E0E0;
 }
 </style>
