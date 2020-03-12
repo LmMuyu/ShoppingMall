@@ -3,7 +3,7 @@
     <file-top-features />
     <file-user-info />
     <file-features class="isfeatures" />
-    <file-sign-out class="filesignout" @click.native="DeleteWebStorage" v-if="exithidden" />
+    <file-sign-out class="filesignout" @click.native="DeleteWebStorage" v-if="exithidden" v-ripple />
   </div>
 </template>
 
@@ -13,9 +13,11 @@ import fileFeatures from "./subcomponebts/fileFeatures";
 import fileTopFeatures from "./subcomponebts/fileTopFeatures";
 import fileSignOut from "./subcomponebts/fileSignOut";
 
+import { DELETEUSERS } from "@/store/murations-types";
+
 export default {
   name: "file",
-  inject:["reload"],
+  inject: ["reload"],
   data() {
     return {
       exithidden: true
@@ -29,16 +31,26 @@ export default {
   },
   created() {
     this.isexithidden();
+    this.pageRefresh();
   },
   methods: {
+    pageRefresh() {
+      if (localStorage.getItem("uesr")) {
+        this.reload();
+      }
+    },
     DeleteWebStorage() {
       localStorage.removeItem("user");
+      //删除state中的用户信息
+      this.$store.commit(DELETEUSERS);
+
       //点击退出后检查有没有删除成功
       if (!localStorage.getItem("user")) {
-        this.$Notify({ type: "primary", message: "退出成功" });
-        this.reload()
-      }else{
-        this.$Notify({ type: "primary", message: "网络异常" });
+        this.$toast("已退出当前账号");
+        this.exithidden = false;
+        this.reload();
+      } else {
+        this.$toast("网络异常");
       }
     },
     isexithidden() {

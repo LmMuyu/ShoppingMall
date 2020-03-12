@@ -45,9 +45,11 @@ export default {
 
 <style scoped>
 #comment {
-  margin-top: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
   height: auto;
+  background-color: #ffffff;
 }
 .content{
   width: calc(100% - 5.8rem);

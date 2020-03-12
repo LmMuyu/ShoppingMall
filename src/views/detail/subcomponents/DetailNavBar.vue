@@ -4,7 +4,7 @@
       <div slot="left" class="left" @click="backReturn">
         <img src="~assets/images/detailnavbarleft.svg" alt />
       </div>
-      <div slot="center" class="center">
+      <div slot="center" class="center" v-ripple>
         <div
           v-for="(item, index) in titleNavbar"
           :key="index"

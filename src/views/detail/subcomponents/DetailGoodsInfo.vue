@@ -4,7 +4,7 @@
       <span class="isdesc">{{desc.desc}}</span>
     </div>
     <span class="image" v-for="(item, index) in detailImage" :key="index">
-      <img v-lazy="item" alt @load="images" />
+      <img v-lazy="item" @load="images" />
     </span>
   </div>
 </template>
@@ -57,6 +57,7 @@ export default {
   width: 100%;
   height: 6.875rem;
   word-wrap: break-word;
+  background-color: #ffffff;
 }
 .image {
   margin-top: 50px;

@@ -13,7 +13,11 @@
 export default {
   methods: {
     shopping() {
-      this.$emit("shopping");
+      if (localStorage.getItem("user")) {
+        this.$emit("shopping");
+      } else {
+        this.$toast("未登录")
+      }
     },
     RouterJump(value) {
       this.$bus.$emit("valueers");
@@ -28,6 +32,6 @@ export default {
 
 <style scoped>
 .vangoodsaction {
-  box-shadow: 0px -1px rgb(250, 250, 250);
+  box-shadow: 0px -1px #fafafa;
 }
 </style>

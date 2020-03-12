@@ -171,8 +171,9 @@ export default {
 .detail {
   position: relative;
   z-index: 20;
-  background-color: #ffffff;
+  background-color: #f0f0f0;
   height: 100vh;
+  min-width: 100%;
 }
 .iswiaperr {
   height: calc(100vh - 44px - 50px);
@@ -180,6 +181,7 @@ export default {
 .isnavbar {
   position: relative;
   z-index: 13;
+  width: 100%;
 }
 .backtop {
   margin-bottom: 15px;
@@ -187,8 +189,5 @@ export default {
 .action {
   position: relative;
   z-index: 13;
-}
-.actionis{
-  margin-bottom: 16px;
 }
 </style>

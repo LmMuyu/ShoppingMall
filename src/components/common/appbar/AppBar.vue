@@ -41,8 +41,8 @@ export default {
 
 <style scoped>
 .vancol {
-  background-color: #30336b;
-  height: 49px;
-  line-height: 49px;
+  background-color: #ff8198;
+  height: 44px;
+  line-height: 44px;
 }
 </style>

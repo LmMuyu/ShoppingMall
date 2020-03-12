@@ -44,16 +44,16 @@ export default {
 
 <style scoped>
 .iosmenu {
-  padding: 4px;
+  padding: 2px;
 }
 .right {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  height: 49px;
+  height: 44px;
 }
 .left {
   width: 100%;
-  height: 49px;
+  height: 44px;
 }
 </style>

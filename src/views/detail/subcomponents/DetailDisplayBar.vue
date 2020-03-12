@@ -58,6 +58,7 @@ export default {
 
 <style scoped>
 .detail-display-bar {
+  background-color: #ffffff;
   box-shadow: 0 3px 1px #eeeeee;
 }
 .title {

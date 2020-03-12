@@ -6,12 +6,14 @@ import { DropdownMenu, DropdownItem } from "vant";
 import { Checkbox, CheckboxGroup } from "vant";
 import { Tabbar, TabbarItem } from "vant";
 import { Swipe, SwipeItem } from "vant";
+import { ImagePreview } from "vant";
 import { Col, Row } from "vant";
 import { Search } from "vant";
 import { Notify } from "vant";
 import { Button } from "vant";
-import { Card } from "vant";
 import { Dialog } from "vant";
+import { Toast } from "vant";
+import { Card } from "vant";
 
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
@@ -33,3 +35,5 @@ Vue.use(Col);
 Vue.use(Row);
 
 Vue.prototype.$Notify = Notify;
+Vue.prototype.$toast = Toast;
+Vue.prototype.$imagepreview = ImagePreview;

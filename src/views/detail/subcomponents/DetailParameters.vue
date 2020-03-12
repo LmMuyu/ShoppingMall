@@ -33,6 +33,7 @@ export default {
 
 <style scoped>
 #parameters{
+  background-color: #ffffff;
   box-shadow: 0px 3px 1px #eeeeee
 }
 .tatlb {

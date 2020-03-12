@@ -37,8 +37,8 @@ export default {
   },
   methods: {
     returns() {
-      this.$bus.$emit("statuschange");
-      this.$router.back();
+      this.$bus.$emit("statuschange"); //src\views\category\category.vue
+      this.$router.push("/category");
     },
     searchFor() {
       this.$store.dispatch(SEARCHHISTORY, this.value);
@@ -50,10 +50,10 @@ export default {
 
 <style scoped>
 .search {
-  height: 49px;
+  height: 44px;
 }
 .left {
-  height: 49px;
+  height: 44px;
   display: flex;
   align-items: center;
   color: #f0f0f0;
@@ -63,8 +63,8 @@ export default {
   margin-left: 3px;
 }
 .form {
-  background-color: #30336b;
-  height: 49px;
+  background-color: #ff8198;
+  height: 44px;
 }
 .action {
   color: #f0f0f0;

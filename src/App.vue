@@ -31,7 +31,9 @@ export default {
   methods: {
     reload() {
       this.isRouterAlive = false;
-      this.$nextTick(function() {
+      console.log(11);
+
+      this.$nextTick(() => {
         this.isRouterAlive = true;
       });
     }
@@ -43,6 +45,7 @@ export default {
 .tabbar {
   position: relative;
   z-index: 9;
+  max-width: 1920px;
 }
 
 @import "~assets/css/baess.css";

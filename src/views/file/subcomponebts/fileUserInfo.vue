@@ -2,7 +2,10 @@
   <div class="fileuserinfo">
     <div class="header">
       <span class="image">
-        <img :src="userInfo.avatar? userInfo.avatar:'../../../assets/images/login/loginPassword.svg'"  />
+        <img
+          :src="userInfo.avatar? userInfo.avatar:'../../../assets/images/login/loginPassword.svg'"
+          @click="picturePreview"
+        />
       </span>
     </div>
     <div class="flexes" @click="LoginJump">
@@ -25,6 +28,12 @@ export default {
 
       this.$router.push("/login").catch(err => {
         err;
+      });
+    },
+    picturePreview() {
+      this.$imagepreview({
+        images: [JSON.parse(localStorage.getItem("user")).avatar],
+        showIndex: false
       });
     }
   },

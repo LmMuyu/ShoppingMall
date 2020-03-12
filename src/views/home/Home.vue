@@ -22,7 +22,7 @@
     >
       <home-swipe :swipeimg="swipeimg" @swiperLoad="iswiper" class="swiper" />
       <display-bar :displaybarimg="displaybarimg" />
-      <recom-class />
+      <!-- <recom-class /> -->
       <tab-control
         :tabcontroltitle="tabcontroltitle"
         @iscontrolvalue="controldata"
@@ -43,7 +43,7 @@ import Scroll from "components/content/scroll/Scroll";
 //子组件
 import HomeSwipe from "./subcomponents/HomeSwipe";
 import DisplayBar from "./subcomponents/DisplayBar";
-import RecomClass from "./subcomponents/RecomClass";
+// import RecomClass from "./subcomponents/RecomClass";
 //方法
 import { getHomeMultidata, getHomeGoodsdata } from "network/home.js";
 import { backtopmixin } from "common/mixin.js";
@@ -55,7 +55,7 @@ export default {
     NavBar,
     HomeSwipe,
     DisplayBar,
-    RecomClass,
+    // RecomClass,
     TabControl,
     GoodsList,
     Scroll

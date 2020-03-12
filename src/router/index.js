@@ -6,12 +6,12 @@ const Home = () => import("views/home/Home");
 const File = () => import("views/file/File");
 const Login = () => import("views/Login/login");
 const Detail = () => import("views/detail/Detail");
+const Category = () => import("views/category/category.vue");
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
-const Category = () => import("views/category/category.vue");
+
 const CategorySearchFor = () =>
   import("components/content/searchfor/searchFor.vue");
-
 const loginRegistered = () =>
   import("views/Login/subcomponents/loginRegistered");
 

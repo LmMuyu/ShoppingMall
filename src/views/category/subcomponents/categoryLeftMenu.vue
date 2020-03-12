@@ -66,7 +66,7 @@ export default {
   border-bottom: 1px solid rgb(240, 240, 240);
 }
 .titles{
-  padding: 16px;
+  padding: 15px;
 }
 .ivu-menu-item{
   padding: 0;

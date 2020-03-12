@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-.tabbar {
-  width: 100vh;
+.tabbar{
+  width: 100%;
 }
 </style>

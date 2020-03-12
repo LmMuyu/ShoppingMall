@@ -3,10 +3,7 @@
     <nav-bar class="navbar">
       <div slot="center" class="cart">购物车({{ goodshas }})</div>
       <div slot="right" class="quanxuan">
-        <span>
-          <input type="checkbox" id="checkbox1" v-model="trues" @click="checkbox" />
-        </span>
-        <span>全选</span>
+        <van-checkbox v-model="trues" @click="checkbox" shape="square">全选</van-checkbox>
       </div>
     </nav-bar>
     <scroll class="scroll" ref="scroll">
@@ -79,10 +76,10 @@ export default {
   background-color: #f0f0f0;
 }
 .quanxuan {
+  height: 44px;
   display: flex;
   align-items: center;
 }
-
 #radio1 {
   line-height: 44px;
 }
