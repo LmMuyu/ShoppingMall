@@ -89,7 +89,7 @@ export default {
 .issale {
   flex: 1;
   font-size: 13px;
-  color: #dad6d6;
+  color: #525050;
 }
 .service {
   display: flex;
@@ -107,8 +107,7 @@ export default {
   width: 48%;
 }
 .whole {
-  float: left;
-  flex: 1;
-  white-space: nowrap;
+  padding: 8px 16px 8px 0;
+  align-items: center;
 }
 </style>

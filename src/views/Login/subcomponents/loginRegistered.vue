@@ -193,7 +193,7 @@ export default {
 .logincomponent {
   height: 100vh;
   position: relative;
-  z-index: 99999;
+  z-index: 12;
   background-color: #f0f0f0;
 }
 .yanz {

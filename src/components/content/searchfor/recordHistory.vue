@@ -16,7 +16,7 @@
 <script>
 import { Dialog } from "vant";
 import { mapGetters } from "vuex";
-import { DELETERECORD } from "@/store/murations-types";
+import { DELETERECORD, DELETEHISTORY } from "@/store/murations-types";
 
 export default {
   methods: {
@@ -24,12 +24,13 @@ export default {
       this.$store.commit(DELETERECORD, index);
     },
     isDelete() {
-      Dialog.alert({
-        title: "标题",
-        message: "弹窗内容"
-      }).then(() => {
-        // on close
-      });
+      Dialog.confirm({
+        message: "确定删除全部搜索记录?"
+      })
+        .then(() => {
+          this.$store.commit(DELETEHISTORY);
+        })
+        .catch(() => {});
     }
   },
   computed: {

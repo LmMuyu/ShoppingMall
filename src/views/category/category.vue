@@ -41,7 +41,9 @@ export default {
         categorytitle: "",
         categoryleftmenudata: []
       },
-      classification: true
+      classification: true, //本组件显示隐藏
+      goodsData: [],
+      goodsShow: {}
     };
   },
   created() {
@@ -52,8 +54,20 @@ export default {
     getCategory() {
       //数据请求
       getCategory().then(res => {
-        // console.log(res.category);
+        console.log(res.category);
         this.categoryTitle = res.category.list;
+
+        if (res) {
+          for (const val of res.list) {
+            this.goodsData.push(val.maitKey);
+          }
+        }
+
+        if (this.goodsData.lenght !== 0) {
+          this.goodsData.forEach(item => {
+            this.goodsShow[item] = [];
+          });
+        }
       });
     },
     vlaueidnex(maitKey = 3627) {

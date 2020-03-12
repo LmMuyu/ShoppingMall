@@ -23,7 +23,7 @@ export default {
   width: 100%;
   position: relative;
   background-color: #ffffff;
-  z-index: 10000;
+  z-index: 15;
 }
 .isrecord{
   float: left;

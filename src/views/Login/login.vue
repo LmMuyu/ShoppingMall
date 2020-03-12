@@ -18,7 +18,7 @@ export default {
 #login {
   height: 100vh;
   position: relative;
-  z-index: 99999;
+  z-index: 10;
   background-color: #f0f0f0;
 }
 </style>

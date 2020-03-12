@@ -32,6 +32,6 @@ export default {
     return state.user;
   },
   historyRecord(state) {
-    return state.searchHistory;
+    return [...new Set(state.searchHistory)];
   }
 };

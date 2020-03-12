@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { SEARCHHISTORY, DELETERECORD } from "./murations-types";
+import { SEARCHHISTORY, DELETERECORD, DELETEHISTORY } from "./murations-types";
 
 export default {
   islistdata(_state, payload) {
@@ -24,5 +24,10 @@ export default {
   },
   [DELETERECORD](state, payload) {
     state.searchHistory.splice(payload, 1);
+    localStorage.setItem("search", JSON.stringify(state.searchHistory));
+  },
+  [DELETEHISTORY](state, _payload) {
+    localStorage.removeItem("search");
+    state.searchHistory = [];
   }
 };

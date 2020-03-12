@@ -1,6 +1,6 @@
 <template>
   <div class="vangoodsaction">
-    <van-goods-action>
+    <van-goods-action class="vangoodsaction">
       <van-goods-action-icon icon="chat-o" text="客服" />
       <van-goods-action-icon icon="cart-o" text="购物车" @click="RouterJump('/shoppingcart')" />
       <van-goods-action-button type="warning" text="加入购物车" @click="shopping" />
@@ -27,8 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.vangoodsaction{
-  display: flex;
-  justify-content: flex-end;
+.vangoodsaction {
+  box-shadow: 0px -1px rgb(250, 250, 250);
 }
 </style>

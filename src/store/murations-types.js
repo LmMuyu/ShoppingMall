@@ -8,3 +8,4 @@ export const SEARCHHISTORY = "searchhistory";
  */
 export const HISTORY = "history";
 export const DELETERECORD = "deleterecord";
+export const DELETEHISTORY = "deletehistory"

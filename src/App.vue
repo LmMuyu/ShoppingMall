@@ -42,7 +42,7 @@ export default {
 <style>
 .tabbar {
   position: relative;
-  z-index: 9999;
+  z-index: 9;
 }
 
 @import "~assets/css/baess.css";

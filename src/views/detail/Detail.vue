@@ -1,24 +1,20 @@
 <template>
-  <transition
-    name="custom-classes-transition"
-    leave-active-class="animate bouncelnRight-leave"
-    enter-active-class="animate bouncelnLeft-enter"
-  >
-    <div class="detail">
-      <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
-      <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
-        <detail-swiper :swiperimg="itemInfo" />
-        <detail-display-bar :goods="isgoods" />
-        <detail-information :business="business" />
-        <detail-goods-info :detailImage="detailImage" :desc="desc" @isimage="imageLoad" />
-        <detail-parameters ref="parameters" :parameters="parameters" :comment="comment" />
-        <comment ref="comment" :comment="comment" />
-        <goods-list ref="recommend" :goods="recommend" />
-      </scroll>
-      <back-top @click.native="backclick" v-show="show" class="backtop" />
+  <div class="detail">
+    <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
+    <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
+      <detail-swiper :swiperimg="itemInfo" />
+      <detail-display-bar :goods="isgoods" />
+      <detail-information :business="business" />
+      <detail-goods-info :detailImage="detailImage" :desc="desc" @isimage="imageLoad" />
+      <detail-parameters ref="parameters" :parameters="parameters" :comment="comment" />
+      <comment ref="comment" :comment="comment" />
+      <goods-list ref="recommend" :goods="recommend" />
+    </scroll>
+    <back-top @click.native="backclick" v-show="show" class="backtop" />
+    <div class="actionis">
       <goods-action @shopping="addshopping" class="action" />
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -174,22 +170,25 @@ export default {
 <style scoped>
 .detail {
   position: relative;
-  z-index: 9999999;
+  z-index: 20;
   background-color: #ffffff;
   height: 100vh;
 }
 .iswiaperr {
-  height: calc(100% - 44px - 50px);
+  height: calc(100vh - 44px - 50px);
 }
 .isnavbar {
   position: relative;
-  z-index: 999999;
+  z-index: 13;
 }
 .backtop {
   margin-bottom: 15px;
 }
 .action {
   position: relative;
-  z-index: 999999;
+  z-index: 13;
+}
+.actionis{
+  margin-bottom: 16px;
 }
 </style>
