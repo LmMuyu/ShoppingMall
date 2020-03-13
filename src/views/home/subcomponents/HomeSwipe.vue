@@ -2,7 +2,7 @@
   <div class="homeswipe">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="(item, index) in swipeimg" :key="index">
-        <img class="image" v-lazy="item.image" @load="imageLoad" />
+        <img class="image" :src="item.image" @load="imageLoad" />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -36,7 +36,6 @@ export default {
 </script>
 
 <style scoped>
-
 .my-swipe .van-swipe-item {
   color: #fff;
   text-align: center;
@@ -47,6 +46,6 @@ export default {
 
 .image {
   width: 100%;
-  height: 150px
+  height: 100%;
 }
 </style>

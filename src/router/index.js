@@ -7,6 +7,8 @@ const File = () => import("views/file/File");
 const Login = () => import("views/Login/login");
 const Detail = () => import("views/detail/Detail");
 const Category = () => import("views/category/category.vue");
+const Buy = () => import("views/buy/Buy");
+
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
 
@@ -66,6 +68,11 @@ const routes = [
     path: "/registered",
     name: "registered",
     component: loginRegistered
+  },
+  {
+    path: "/buy",
+    name: "buy",
+    component: Buy
   }
 ];
 

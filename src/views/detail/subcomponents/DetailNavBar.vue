@@ -59,6 +59,6 @@ export default {
   margin-top: 5px;
 }
 .active {
-  color: #ee8686;
+  color: #ffffff;
 }
 </style>

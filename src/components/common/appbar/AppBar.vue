@@ -1,5 +1,5 @@
 <template>
-  <div class="vancol">
+  <div class="vancol" :style="{'background-color':background}">
     <van-row click="vanrow">
       <van-col :span="leftspan">
         <slot name="left"></slot>
@@ -34,6 +34,12 @@ export default {
       default() {
         return 8;
       }
+    },
+    background:{
+      type:String,
+      default(){
+        return "#ff8198"
+      }
     }
   }
 };
@@ -41,7 +47,6 @@ export default {
 
 <style scoped>
 .vancol {
-  background-color: #ff8198;
   height: 44px;
   line-height: 44px;
 }

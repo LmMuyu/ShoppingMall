@@ -49,7 +49,7 @@ export default {
       titleNavbar: ["商品", "参数", "评论", "推荐"],
       itemInfo: [], //图片
       isgoods: {}, //商品描述
-      business: {},
+      business: {}, //商家信息
       desc: {},
       detailImage: [],
       parameters: {},

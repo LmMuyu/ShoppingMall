@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <keep-alive exclude="detail,startling,registered,login,searchfor">
+    <keep-alive exclude="startling,registered,login,searchfor">
       <router-view v-if="isRouterAlive"></router-view>
     </keep-alive>
-    <tab-bar class="tabbar"></tab-bar>
+    <tab-bar class="tabbar" v-if="hidedTabBar"></tab-bar>
   </div>
 </template>
 
@@ -17,25 +17,36 @@ export default {
   },
   provide() {
     return {
-      reload: this.reload
+      reload: this.reload,
+      dsiplay: this.dsiplay
     };
   },
   data() {
     return {
-      isRouterAlive: true
+      isRouterAlive: true,
+      hidedTabBar: true
     };
   },
   created() {
-    this.$router.push("/home");
+    this.goBack();
+    // this.$router.push("/home");
   },
   methods: {
     reload() {
       this.isRouterAlive = false;
-      console.log(11);
-
       this.$nextTick(() => {
         this.isRouterAlive = true;
       });
+    },
+    dsiplay() {
+      this.hidedTabBar = false;
+    },
+    goBack() {
+      const path = this.$route.path;
+
+      if (path !== "/buy") {
+        this.hidedTabBar = true;
+      }
     }
   }
 };
@@ -45,7 +56,6 @@ export default {
 .tabbar {
   position: relative;
   z-index: 9;
-  max-width: 1920px;
 }
 
 @import "~assets/css/baess.css";

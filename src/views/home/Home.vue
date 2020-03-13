@@ -78,8 +78,7 @@ export default {
       topoffsetTop: 0, //储存组件TabControl的offsetTop
       topnav: false, //储存吸顶效果的状态
       saveY: 0, //储存Y值
-      searchFor: "", //搜索栏值
-
+      searchFor: "" //搜索栏值
     };
   },
   created() {
@@ -143,7 +142,7 @@ export default {
   mounted() {
     this.$bus.$on("imgcomplete", () => {
       // this.scroll.refresh();
-      console.log(1111);
+      //console.log(1111);
     });
   },
   activated() {

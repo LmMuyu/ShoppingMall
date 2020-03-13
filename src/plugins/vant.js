@@ -14,7 +14,9 @@ import { Button } from "vant";
 import { Dialog } from "vant";
 import { Toast } from "vant";
 import { Card } from "vant";
+import { AddressList } from 'vant';
 
+Vue.use(AddressList);
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
 Vue.use(CheckboxGroup);

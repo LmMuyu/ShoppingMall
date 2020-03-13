@@ -6,15 +6,16 @@ import "./network/request";
 import "./plugins/vant.js";
 import VueLazyLoad from "vue-lazyload";
 import "./plugins/element.js";
-import animate from "animate.css";
+import animated from "animate.css";
 import ViewUI from "view-design";
 import "view-design/dist/styles/iview.css";
-import vuetify from './plugins/vuetify'
+import vuetify from "./plugins/vuetify";
+import FastClick from "fastclick";
 
 Vue.config.productionTip = false;
 Vue.prototype.$bus = new Vue();
 Vue.use(VueLazyLoad);
-Vue.use(animate);
+Vue.use(animated);
 Vue.use(ViewUI, {
   transfer: true,
   size: "large",
@@ -24,11 +25,11 @@ Vue.use(ViewUI, {
     arrowSize: 20
   }
 });
+FastClick.attach(document.body); //解决移动端300ms
 
 new Vue({
   router,
   store,
   vuetify,
-  animate,
   render: h => h(App)
 }).$mount("#app");
