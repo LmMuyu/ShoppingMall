@@ -3,9 +3,9 @@ import {
   SEARCHHISTORY,
   DELETERECORD,
   DELETEHISTORY,
-  DELETEUSERS
+  DELETEUSERS,
+  INFORMATION
 } from "./murations-types";
-import { Array } from "core-js";
 
 export default {
   islistdata(_state, payload) {
@@ -38,5 +38,8 @@ export default {
   },
   [DELETEUSERS](state, _payload) {
     state.user = [];
+  },
+  [INFORMATION](state, payload) {
+    state.productInformation = payload;
   }
 };

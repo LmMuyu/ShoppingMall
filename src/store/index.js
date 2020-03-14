@@ -9,7 +9,8 @@ Vue.use(Vuex);
 let state = {
   goodslist: [], //购物车商品
   user: JSON.parse(localStorage.getItem("user")) || false, //用户信息
-  searchHistory: JSON.parse(localStorage.getItem("search")) || [] //搜索记录
+  searchHistory: JSON.parse(localStorage.getItem("search")) || [], //搜索记录
+  productInformation: {} //商品信息
 };
 
 export default new Vuex.Store({

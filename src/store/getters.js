@@ -33,5 +33,8 @@ export default {
   },
   historyRecord(state) {
     return [...new Set(state.searchHistory)];
+  },
+  information(state){
+    return state.productInformation
   }
 };

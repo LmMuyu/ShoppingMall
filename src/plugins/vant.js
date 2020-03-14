@@ -15,7 +15,12 @@ import { Dialog } from "vant";
 import { Toast } from "vant";
 import { Card } from "vant";
 import { AddressList } from 'vant';
+import { Cell, CellGroup } from 'vant';
+import { SubmitBar } from 'vant';
 
+Vue.use(SubmitBar);
+Vue.use(Cell);
+Vue.use(CellGroup)
 Vue.use(AddressList);
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);

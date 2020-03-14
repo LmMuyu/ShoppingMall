@@ -34,7 +34,7 @@ export default {
   },
   created() {},
   methods: {
-    scrollTo(time="800") {
+    scrollTo(time = "800") {
       this.scroll.scrollTo(0, 0, time);
     },
     finishPullUp() {
@@ -56,7 +56,7 @@ export default {
       pullUpLoad: this.PullUpLoading || {
         threshold: -50
       },
-      scrollbar: this.fade  //滚动条
+      scrollbar: this.fade //是否开启滚动条
     });
     //监听滚动并将y值传出
     this.scroll.on("scroll", position => {

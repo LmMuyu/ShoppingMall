@@ -12,7 +12,7 @@
     </scroll>
     <back-top @click.native="backclick" v-show="show" class="backtop" />
     <div class="actionis">
-      <goods-action @shopping="addshopping" class="action" />
+      <goods-action @shopping="addshopping" class="action" @purchasePage="purchasee" />
     </div>
   </div>
 </template>
@@ -39,6 +39,7 @@ import {
 } from "network/detail";
 import { debounce } from "common/debounce";
 import { backtopmixin } from "common/mixin.js";
+import {INFORMATION} from '@/store/murations-types'
 
 export default {
   name: "detail",
@@ -50,15 +51,15 @@ export default {
       itemInfo: [], //图片
       isgoods: {}, //商品描述
       business: {}, //商家信息
-      desc: {},
-      detailImage: [],
-      parameters: {},
-      comment: {},
+      desc: {}, //商品描述
+      detailImage: [], //商品照片
+      parameters: {}, //参数
+      comment: {}, //评论
       recommend: [],
       themeTopYs: [], //滚到内容组件的位置:Y值
       themeTopy: null,
       indexis: 0, //滚动
-      arr: []
+      positionY: 0 //储存Y值
     };
   },
   components: {
@@ -92,7 +93,7 @@ export default {
   methods: {
     getDetail() {
       getDetail(this.iid).then(res => {
-        // console.log(res);
+        console.log(res);
         const data = res.result;
         //轮播图片
         this.itemInfo = data.itemInfo.topImages;
@@ -148,6 +149,8 @@ export default {
 
       //返回顶部图标隐藏或显示
       position < -300 ? (this.show = true) : (this.show = false);
+
+      this.positionY = position;
     },
     //加入购物车获取单个商品参数
     addshopping() {
@@ -161,9 +164,31 @@ export default {
       goodsdata.date = Date.now();
 
       this.$store.dispatch("addcart", goodsdata);
+    },
+    pagePposition() {
+      this.$refs.scroll.scroll.scrollTo(0, this.positionY, 0);
+    },
+    purchasee() {
+      const goodsdata = {};
+      //照片
+      goodsdata.goodsimage = this.detailImage[0];
+      //店家名
+      goodsdata.business = this.business.name;
+      //商品描述
+      goodsdata.desc = this.desc.desc;
+      //价格
+      goodsdata.lownowrrice = this.isgoods.lownowprice;
+      //运输方式
+      goodsdata.courier = this.isgoods.columns[2];
+      //传入vuex
+      this.$store.commit(INFORMATION,goodsdata)
+
+      this.$router.push("/buy");
     }
   },
-  mounted() {}
+  mounted() {
+    this.pagePposition();
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive exclude="startling,registered,login,searchfor">
+    <keep-alive exclude="startling,registered,detail,login,searchfor,buy">
       <router-view v-if="isRouterAlive"></router-view>
     </keep-alive>
     <tab-bar class="tabbar" v-if="hidedTabBar"></tab-bar>
@@ -28,7 +28,6 @@ export default {
     };
   },
   created() {
-    this.goBack();
     // this.$router.push("/home");
   },
   methods: {
@@ -39,14 +38,7 @@ export default {
       });
     },
     dsiplay() {
-      this.hidedTabBar = false;
-    },
-    goBack() {
-      const path = this.$route.path;
-
-      if (path !== "/buy") {
-        this.hidedTabBar = true;
-      }
+      this.hidedTabBar = !this.hidedTabBar;
     }
   }
 };
