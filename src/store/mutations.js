@@ -4,7 +4,9 @@ import {
   DELETERECORD,
   DELETEHISTORY,
   DELETEUSERS,
-  INFORMATION
+  INFORMATION,
+  ADDITION,
+  ADDRESSINFO
 } from "./murations-types";
 
 export default {
@@ -41,5 +43,15 @@ export default {
   },
   [INFORMATION](state, payload) {
     state.productInformation = payload;
+  },
+  [ADDITION](state, payload) {
+    state.productInformation["lownowrrice"] * payload;
+    state.productInformation.count = payload;
+  },
+  [ADDRESSINFO](state, payload) {
+    const info = state.addressInfo;
+    info.push(payload);
+
+    localStorage.setItem("addinfo", JSON.stringify(info));
   }
 };

@@ -7,10 +7,12 @@ const File = () => import("views/file/File");
 const Login = () => import("views/Login/login");
 const Detail = () => import("views/detail/Detail");
 const Category = () => import("views/category/category.vue");
+const addressInfo = () => import("views/addressinfo/addressInfo.vue");
 const Buy = () => import("views/buy/Buy");
 
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
+const addAddress = () => import("views/addressinfo/childcomps/addAddress.vue");
 
 const CategorySearchFor = () =>
   import("components/content/searchfor/searchFor.vue");
@@ -73,6 +75,18 @@ const routes = [
     path: "/buy",
     name: "buy",
     component: Buy
+  },
+  {
+    path: "/addressinfo",
+    name: "addressinfo",
+    component: addressInfo,
+    children: [
+      {
+        path: "addaddress",
+        name: "addaddress",
+        component: addAddress
+      }
+    ]
   }
 ];
 

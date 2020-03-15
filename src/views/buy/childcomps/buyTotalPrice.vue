@@ -19,16 +19,10 @@ export default {
       this.isprice = price * quantity;
     });
 
-    this.isprice = this.information.lownowprice;
+    this.isprice = this.information.lownowrrice;
   },
   computed: {
     ...mapGetters(["information"])
-  },
-  watch: {
-    information() {
-      this.isprice = this.information.lownowprice;
-    },
-    deep: true
   },
   filters: {
     priceFilte(value) {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive exclude="startling,registered,detail,login,searchfor,buy">
+    <keep-alive exclude="startling,registered,detail,login,searchfor,buy,addressinfo,addaddress">
       <router-view v-if="isRouterAlive"></router-view>
     </keep-alive>
     <tab-bar class="tabbar" v-if="hidedTabBar"></tab-bar>

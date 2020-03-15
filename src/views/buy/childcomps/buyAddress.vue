@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto" max-width="1920" outlined flat tile>
+    <v-card class="mx-auto" max-width="1920" outlined flat tile @click="address">
       <v-card-text>
         <div>Word of the Day</div>
         <div class="card">
@@ -16,7 +16,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    address() {
+      this.$router.push("/addressinfo").catch(err => {
+        err;
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -37,5 +45,4 @@ export default {};
 .spanleft {
   text-align: right;
 }
-
 </style>

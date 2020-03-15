@@ -14,13 +14,19 @@ import { Button } from "vant";
 import { Dialog } from "vant";
 import { Toast } from "vant";
 import { Card } from "vant";
-import { AddressList } from 'vant';
-import { Cell, CellGroup } from 'vant';
-import { SubmitBar } from 'vant';
+import { AddressList } from "vant";
+import { Cell, CellGroup } from "vant";
+import { SubmitBar } from "vant";
+import { Popup } from "vant";
+import { AddressEdit } from "vant";
+import { Area } from "vant";
 
+Vue.use(Area);
+Vue.use(AddressEdit);
+Vue.use(Popup);
 Vue.use(SubmitBar);
 Vue.use(Cell);
-Vue.use(CellGroup)
+Vue.use(CellGroup);
 Vue.use(AddressList);
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
@@ -44,3 +50,4 @@ Vue.use(Row);
 Vue.prototype.$Notify = Notify;
 Vue.prototype.$toast = Toast;
 Vue.prototype.$imagepreview = ImagePreview;
+Vue.prototype.$Dialog = Dialog;

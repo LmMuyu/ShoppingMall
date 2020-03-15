@@ -21,6 +21,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { ADDITION } from "@/store/murations-types";
 
 export default {
   data() {
@@ -29,9 +30,6 @@ export default {
       value: 1
     };
   },
-  // created() {
-  //   this.$bus.$emit("addition", this.information.lownowrrice, this.value);
-  // },
   methods: {
     inputis() {
       if (this.value > 99) {
@@ -50,15 +48,10 @@ export default {
         if (this.value <= 1) return false;
         this.value--;
       }
-      
-      this.$bus.$emit("addition", this.information.lownowrrice, this.value);
-    },
-    aadditons() {
-      this.$bus.$emit("addition", this.information.lownowrrice, this.value);
+
+      // this.$bus.$emit("addition", this.information.lownowrrice, this.value); //src\views\buy\childcomps\buyTotalPrice.vue
+      this.$store.commit(ADDITION, this.value);
     }
-  },
-  mounted() {
-    this.aadditons();
   },
   computed: {
     ...mapGetters(["information"])
