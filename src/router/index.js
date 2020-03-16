@@ -13,6 +13,8 @@ const Buy = () => import("views/buy/Buy");
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
 const addAddress = () => import("views/addressinfo/childcomps/addAddress.vue");
+const addressEdit = () =>
+  import("views/addressinfo/childcomps/addressEdit.vue");
 
 const CategorySearchFor = () =>
   import("components/content/searchfor/searchFor.vue");
@@ -85,6 +87,11 @@ const routes = [
         path: "addaddress",
         name: "addaddress",
         component: addAddress
+      },
+      {
+        path: "addressedit",
+        name: "addressedit",
+        component: addressEdit
       }
     ]
   }

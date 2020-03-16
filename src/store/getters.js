@@ -38,11 +38,11 @@ export default {
     return state.productInformation;
   },
   addinfo(state) {
+    const isaddinfo = [];
     for (const item of state.addressInfo) {
-      console.log(item);
-
       class infois {
         constructor({
+          id,
           name,
           tel,
           province,
@@ -51,21 +51,22 @@ export default {
           addressDetail,
           isDefault
         }) {
+          this.id = id;
           this.name = name;
           this.tel = tel;
           this.address = province + city + county + addressDetail;
           this.isDefault = isDefault;
         }
       }
-
       const addinfoes = new infois(item);
-
-      const isaddinfo = [];
-
       isaddinfo.unshift(addinfoes);
-
-      // if (isaddinfo.length === state.addressInfo.length)
-      return isaddinfo;
     }
+    return isaddinfo;
+  },
+  addressinfos(state) {
+    const addinfos = state.addressInfo.find(item => {
+      return item["isDefault"] == true;
+    });
+    return addinfos;
   }
 };

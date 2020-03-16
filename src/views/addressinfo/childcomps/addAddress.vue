@@ -67,7 +67,6 @@ export default {
         .catch(() => {
           // on cancel
         });
-      console.log(content);
     },
     onChangeDetail(val) {
       if (val) {

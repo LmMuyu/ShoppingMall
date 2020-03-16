@@ -39,7 +39,7 @@ import {
 } from "network/detail";
 import { debounce } from "common/debounce";
 import { backtopmixin } from "common/mixin.js";
-import {INFORMATION} from '@/store/murations-types'
+import { INFORMATION } from "@/store/murations-types";
 
 export default {
   name: "detail",
@@ -85,7 +85,7 @@ export default {
         this.themeTopYs.push(0);
         this.themeTopYs.push(this.$refs.parameters.$el.offsetTop);
         this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop + 10);
         this.themeTopYs.push(Number.MAX_VALUE);
       }, 150);
     });
@@ -181,7 +181,7 @@ export default {
       //运输方式
       goodsdata.courier = this.isgoods.columns[2];
       //传入vuex
-      this.$store.commit(INFORMATION,goodsdata)
+      this.$store.commit(INFORMATION, goodsdata);
 
       this.$router.push("/buy");
     }

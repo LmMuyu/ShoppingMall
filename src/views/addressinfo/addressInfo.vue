@@ -2,8 +2,9 @@
   <div id="addressinfo">
     <address-nav />
     <addressinfo-main-body @hineus="hineis" v-if="hine" />
-
-    <router-view></router-view>
+    <transition enter-active-class="animated fadeInRight faster" :duration="3000">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -28,6 +29,21 @@ export default {
         err;
       });
     }
+  },
+  mounted() {
+    this.$bus.$on("addressedit", (item, index) => {
+      // console.log(item, index);
+
+      this.$router.push({
+        path: "/addressinfo/addressedit",
+        query: {
+          info: {
+            item,
+            index
+          }
+        }
+      }).catch(err=>{err});
+    });
   },
   beforeUpdate() {
     this.hine = !this.hine;

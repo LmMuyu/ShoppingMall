@@ -2,20 +2,23 @@
   <div>
     <v-card class="mx-auto" max-width="1920" outlined flat tile @click="address">
       <v-card-text>
-        <div>Word of the Day</div>
+        <div class="title">地址:</div>
         <div class="card">
-          <span class="display-1 text--primary clea">be•nev•o•lent</span>
+          <span class="display-1 text--primary clea">{{isAddresss}}</span>
           <span class="spanleft">
             <img src="~assets/images/common/return.svg" />
           </span>
         </div>
-        <p>adjective</p>
+        <span class="title">{{addressinfos["name"]}}</span>
+        <span class="title">{{addressinfos["tel"] | phone}}</span>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   methods: {
     address() {
@@ -23,14 +26,29 @@ export default {
         err;
       });
     }
+  },
+  computed: {
+    ...mapGetters(["addressinfos"]),
+    isAddresss() {
+      return (
+        this.addressinfos.province +
+          this.addressinfos.city +
+          this.addressinfos.county +
+          this.addressinfos.addressDetail || {}
+      );
+    }
+  },
+  filters: {
+    phone(value) {
+      return value.slice(0, -7) + "*".repeat(7);
+    }
   }
 };
 </script>
 
 <style scoped>
 .clea {
-  font-size: 20px;
-  color: #000000;
+  color: red;
 }
 .theme--light.v-card.v-card--outlined {
   border: none;
@@ -44,5 +62,8 @@ export default {
 }
 .spanleft {
   text-align: right;
+}
+.title {
+  color: #000000;
 }
 </style>

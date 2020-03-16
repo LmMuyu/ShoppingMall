@@ -6,3 +6,4 @@ export const DELETEUSERS = "deleteusers";
 export const INFORMATION = "information";
 export const ADDITION = "addition";
 export const ADDRESSINFO = "addressinfo";
+export const EDITADDRESS = "editaddress";

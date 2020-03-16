@@ -6,7 +6,8 @@ import {
   DELETEUSERS,
   INFORMATION,
   ADDITION,
-  ADDRESSINFO
+  ADDRESSINFO,
+  EDITADDRESS
 } from "./murations-types";
 
 export default {
@@ -50,8 +51,14 @@ export default {
   },
   [ADDRESSINFO](state, payload) {
     const info = state.addressInfo;
+    payload.id = state.addressInfo.length + 1;
     info.push(payload);
 
     localStorage.setItem("addinfo", JSON.stringify(info));
   }
+  // [EDITADDRESS](_state, payload) {
+  //   console.log(payload);
+
+  //   // state.EditAddressInformation = payload;
+  // }
 };
