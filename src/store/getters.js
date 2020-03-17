@@ -39,7 +39,9 @@ export default {
   },
   addinfo(state) {
     const isaddinfo = [];
-    for (const item of state.addressInfo) {
+    for (const i in state.addressInfo) {
+      let ix = parseInt(i);
+
       class infois {
         constructor({
           id,
@@ -58,8 +60,8 @@ export default {
           this.isDefault = isDefault;
         }
       }
-      const addinfoes = new infois(item);
-      isaddinfo.unshift(addinfoes);
+      const addinfoes = new infois(state.addressInfo[ix]);
+      isaddinfo.push(addinfoes);
     }
     return isaddinfo;
   },
@@ -68,5 +70,8 @@ export default {
       return item["isDefault"] == true;
     });
     return addinfos;
+  },
+  addressedit(state) {
+    return state.addressInfo;
   }
 };

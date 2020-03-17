@@ -4,12 +4,12 @@
       <v-card-text>
         <div class="title">地址:</div>
         <div class="card">
-          <span class="display-1 text--primary clea">{{isAddresss}}</span>
+          <span class="display-1 text--primary clea">{{isAddresss || ""}}</span>
           <span class="spanleft">
             <img src="~assets/images/common/return.svg" />
           </span>
         </div>
-        <span class="title">{{addressinfos["name"]}}</span>
+        <span class="title">{{addressinfos["name"] || ""}}</span>
         <span class="title">{{addressinfos["tel"] | phone}}</span>
       </v-card-text>
     </v-card>
@@ -30,12 +30,20 @@ export default {
   computed: {
     ...mapGetters(["addressinfos"]),
     isAddresss() {
-      return (
+      // class addressinfo {
+      //   constructor({ province, city, county, addressDetail }) {
+      //     this.info = province + city + county + addressDetail;
+      //   }
+      // }
+      // const addinfo = new addressinfo(this.addressinfos);
+
+      // return addinfo;
+      const addinfo =
         this.addressinfos.province +
           this.addressinfos.city +
           this.addressinfos.county +
-          this.addressinfos.addressDetail || {}
-      );
+          this.addressinfos.addressDetail || {};
+      return addinfo;
     }
   },
   filters: {

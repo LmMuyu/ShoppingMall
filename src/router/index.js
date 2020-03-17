@@ -10,6 +10,7 @@ const Category = () => import("views/category/category.vue");
 const addressInfo = () => import("views/addressinfo/addressInfo.vue");
 const Buy = () => import("views/buy/Buy");
 
+const fileOrder = () => import("views/file/subcomponebts/fileOrder.vue");
 const ShoppingCart = () => import("views/shoppingcart/ShoppingCart");
 const startLogin = () => import("views/Login/subcomponents/LoginComponent.vue");
 const addAddress = () => import("views/addressinfo/childcomps/addAddress.vue");
@@ -34,7 +35,14 @@ const routes = [
   {
     path: "/file",
     name: "file",
-    component: File
+    component: File,
+    children: [
+      {
+        path: "fileorder",
+        name: "fileorder",
+        component: fileOrder
+      }
+    ]
   },
   {
     path: "/detail/:iid",

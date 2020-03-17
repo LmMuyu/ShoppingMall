@@ -1,6 +1,6 @@
 <template>
   <div class="filefeatures">
-    <div class="features" v-ripple>
+    <div class="features" v-ripple @click="fileorder">
       <span class="favorite">
         <img src="~assets/images/fileOrder.svg" alt />
         <span class="font">订单</span>
@@ -27,10 +27,10 @@
         <img src="~assets/images/arrow.svg" alt />
       </span>
     </div>
-    <div class="features" v-ripple>
+    <div class="features" v-ripple @click="addressinfo">
       <span class="favorite">
-        <img src="~assets/images/fileCustomerService.svg" alt />
-        <span class="font">客服</span>
+        <img src="~assets/images/file/address.svg" alt />
+        <span class="font">地址信息</span>
       </span>
       <span class="arrow">
         <img src="~assets/images/arrow.svg" alt />
@@ -49,7 +49,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    addressinfo() {
+      this.$router.push("/addressinfo").catch(err => {
+        err;
+      });
+    },
+    fileorder() {
+      this.$router.push("/file/fileorder");
+    }
+  }
+};
 </script>
 
 <style scoped>

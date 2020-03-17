@@ -10,7 +10,7 @@
       <div slot="footer" class="footer">
         <span>数量:</span>
         <span size="mini" @click="plusLess('plus')">+</span>
-        <input type="text" class="inputtext" v-model="value" @input="inputis" />
+        <input type="text" class="inputtext" v-model="information['count']" @input="inputis" />
         <span size="mini" @click="plusLess('less')">-</span>
       </div>
     </van-card>
@@ -21,14 +21,17 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { ADDITION } from "@/store/murations-types";
+import { ADDITION, REDUCEMONEY } from "@/store/murations-types";
 
 export default {
   data() {
     return {
       true: true,
-      value: 1
+      value:0
     };
+  },
+  created(){
+    this.value = this.information.count
   },
   methods: {
     inputis() {
@@ -44,13 +47,12 @@ export default {
       if (price === "plus") {
         if (this.value > 99) return false;
         this.value++;
+        this.$store.commit(ADDITION);
       } else {
         if (this.value <= 1) return false;
         this.value--;
+        this.$store.commit(REDUCEMONEY)
       }
-
-      // this.$bus.$emit("addition", this.information.lownowrrice, this.value); //src\views\buy\childcomps\buyTotalPrice.vue
-      this.$store.commit(ADDITION, this.value);
     }
   },
   computed: {

@@ -7,3 +7,4 @@ export const INFORMATION = "information";
 export const ADDITION = "addition";
 export const ADDRESSINFO = "addressinfo";
 export const EDITADDRESS = "editaddress";
+export const REDUCEMONEY = "reducemoney"

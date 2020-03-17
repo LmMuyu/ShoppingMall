@@ -15,13 +15,12 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import { EDITADDRESS } from "@/store/murations-types";
 
 export default {
   name: "addaddress",
   data() {
     return {
-      chosenAddressId: "",
+      chosenAddressId: "", //默认地址
       list: []
     };
   },
@@ -30,24 +29,23 @@ export default {
       this.$emit("hineus");
     },
     edit(_item, index) {
-      // this.$store.dispatch(EDITADDRESS, this.list[index].id);
+      console.log(index);
 
-      this.$bus.$emit("addressedit", this.addinfo[index], index);
+      this.$bus.$emit("addressedit", this.addressedit[index], index); //地址信息 //src\views\addressinfo\addressInfo.vue
     }
   },
   mounted() {
     this.list = this.addinfo;
   },
   computed: {
-    ...mapGetters(["addinfo"])
+    ...mapGetters(["addinfo", "addressedit"])
   },
   watch: {
     list() {
       const id = this.list.findIndex(item => {
-        return item.isDefault == true;
+        return Boolean(item.isDefault) === true;
       });
-
-      this.chosenAddressId = id;
+      this.chosenAddressId = id + 1;
     },
     deep: true
   }

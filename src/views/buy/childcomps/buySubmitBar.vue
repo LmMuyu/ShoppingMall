@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-submit-bar :price="information['lownowrrice'] | price" button-text="提交订单" @submit="wdaw">
+    <van-submit-bar :price="prices | price" button-text="提交订单" @submit="wdaw">
       <!-- <span slot="tip">你的收货地址不支持同城送,</span> -->
     </van-submit-bar>
   </div>
@@ -16,7 +16,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["information"])
+    ...mapGetters(["information"]),
+    prices() {
+      const { lownowrrice, count } = this.information;
+      return lownowrrice * count;
+    }
   },
   filters: {
     price(value) {
@@ -27,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-.van-submit-bar__text{
+.van-submit-bar__text {
   text-align: left;
 }
 </style>

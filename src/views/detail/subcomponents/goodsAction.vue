@@ -28,8 +28,27 @@ export default {
         err;
       });
     },
-    purchasePage(){
-      this.$emit("purchasePage")
+    purchasePage() {
+      if (!localStorage.getItem("addinfo")) {
+        this.$Dialog
+          .confirm({
+            message:
+              "抱歉,您没有设置地址无法购买商品,请点击确定按钮前往设置地址",
+            confirmButtonText: "前往"
+          })
+          .then(() => {
+            this.$router.push("/addressinfo").catch(err => {
+              err;
+            });
+          })
+          .catch(() => {
+            // on cancel
+          });
+
+        return false;
+      }
+
+      this.$emit("purchasePage");
     }
   }
 };

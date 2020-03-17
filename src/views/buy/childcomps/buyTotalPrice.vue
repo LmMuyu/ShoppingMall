@@ -1,6 +1,6 @@
 <template>
   <div class="dibar">
-    <van-cell title="商品价格" :border="false" :value="isprice | priceFilte" />
+    <van-cell title="商品价格" :border="false" :value="price | priceFilte" click="price" />
     <van-cell title="运费" value="0" />
   </div>
 </template>
@@ -9,24 +9,16 @@
 import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      isprice: 0
-    };
-  },
-  mounted() {
-    this.$bus.$on("addition", (price, quantity) => {
-      this.isprice = price * quantity;
-    });
-
-    this.isprice = this.information.lownowrrice;
-  },
   computed: {
-    ...mapGetters(["information"])
+    ...mapGetters(["information"]),
+    price() {
+      const { lownowrrice, count } = this.information;
+      return lownowrrice * count;
+    }
   },
   filters: {
     priceFilte(value) {
-      return "¥" + parseInt(value);
+      return "¥" + parseInt(value).toFixed(2);
     }
   }
 };
@@ -35,5 +27,9 @@ export default {
 <style scoped>
 .dibar {
   box-shadow: 0 -2px #fafafa;
+}
+.price {
+  font-size: 20px;
+  color: red;
 }
 </style>

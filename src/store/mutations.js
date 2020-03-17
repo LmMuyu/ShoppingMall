@@ -7,7 +7,8 @@ import {
   INFORMATION,
   ADDITION,
   ADDRESSINFO,
-  EDITADDRESS
+  EDITADDRESS,
+  REDUCEMONEY
 } from "./murations-types";
 
 export default {
@@ -35,30 +36,33 @@ export default {
     state.searchHistory.splice(payload, 1);
     localStorage.setItem("search", JSON.stringify(state.searchHistory));
   },
-  [DELETEHISTORY](state, _payload) {
+  [DELETEHISTORY](state) {
     localStorage.removeItem("search");
     state.searchHistory = [];
   },
-  [DELETEUSERS](state, _payload) {
+  [DELETEUSERS](state) {
     state.user = [];
   },
   [INFORMATION](state, payload) {
     state.productInformation = payload;
   },
-  [ADDITION](state, payload) {
-    state.productInformation["lownowrrice"] * payload;
-    state.productInformation.count = payload;
+  [ADDITION](state) {
+    state.productInformation.count++;
+  },
+  [REDUCEMONEY](state) {
+    state.productInformation.count--;
   },
   [ADDRESSINFO](state, payload) {
     const info = state.addressInfo;
     payload.id = state.addressInfo.length + 1;
-    info.push(payload);
+    info.unshift(payload);
 
     localStorage.setItem("addinfo", JSON.stringify(info));
-  }
-  // [EDITADDRESS](_state, payload) {
-  //   console.log(payload);
+  },
+  [EDITADDRESS](state, payload) {
+    const addinfo = state.addressInfo;
 
-  //   // state.EditAddressInformation = payload;
-  // }
+    addinfo.splice(payload.index, 1, payload.content);
+    localStorage.setItem("addinfo", JSON.stringify(addinfo));
+  }
 };

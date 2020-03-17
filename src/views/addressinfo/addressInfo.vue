@@ -1,11 +1,17 @@
 <template>
-  <div id="addressinfo">
-    <address-nav />
-    <addressinfo-main-body @hineus="hineis" v-if="hine" />
-    <transition enter-active-class="animated fadeInRight faster" :duration="3000">
-      <router-view></router-view>
-    </transition>
-  </div>
+  <transition
+    enter-active-class="animated fadeInRight faster"
+    leave-active-class="animated fadeInLeft faster"
+    :duration="{enter:'300',leave:'300'}"
+  >
+    <div id="addressinfo">
+      <address-nav />
+      <addressinfo-main-body @hineus="hineis" v-if="hine" />
+      <transition enter-active-class="animated fadeInRight faster" :duration="3000">
+        <router-view></router-view>
+      </transition>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -34,15 +40,19 @@ export default {
     this.$bus.$on("addressedit", (item, index) => {
       // console.log(item, index);
 
-      this.$router.push({
-        path: "/addressinfo/addressedit",
-        query: {
-          info: {
-            item,
-            index
+      this.$router
+        .push({
+          path: "/addressinfo/addressedit",
+          query: {
+            info: {
+              item,
+              index
+            }
           }
-        }
-      }).catch(err=>{err});
+        })
+        .catch(err => {
+          err;
+        });
     });
   },
   beforeUpdate() {

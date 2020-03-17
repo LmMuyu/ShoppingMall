@@ -1,4 +1,4 @@
-import { SEARCHHISTORY, /**EDITADDRESS**/ } from "./murations-types.js";
+import { SEARCHHISTORY, EDITADDRESS } from "./murations-types.js";
 
 export default {
   addcart(context, payload) {
@@ -38,15 +38,18 @@ export default {
 
     context.commit(SEARCHHISTORY, hisrecord);
   },
-  // [EDITADDRESS](context, payload) {
-  //   const info = context.state.addressInfo;
-  //   console.log(info);
+  [EDITADDRESS](context, payload) {
+    console.log(payload);
 
-  //   const data = info.find(item => {
-  //     return item.id == payload;
-  //   });
-  //   console.log(data);
+    const addinfo = context.state.addressInfo;
 
-  //   context.commit(EDITADDRESS, data);
-  // }
+    if (payload["content"].isDefault === true) {
+      for (const i of addinfo) {
+        i.isDefault = false;
+      }
+      context.commit(EDITADDRESS, payload);
+    } else {
+      context.commit(EDITADDRESS, payload);
+    }
+  }
 };

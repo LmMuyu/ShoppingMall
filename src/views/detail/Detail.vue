@@ -93,7 +93,6 @@ export default {
   methods: {
     getDetail() {
       getDetail(this.iid).then(res => {
-        console.log(res);
         const data = res.result;
         //轮播图片
         this.itemInfo = data.itemInfo.topImages;
@@ -180,6 +179,8 @@ export default {
       goodsdata.lownowrrice = this.isgoods.lownowprice;
       //运输方式
       goodsdata.courier = this.isgoods.columns[2];
+      //数量默认为1
+      goodsdata.count = 1;
       //传入vuex
       this.$store.commit(INFORMATION, goodsdata);
 
