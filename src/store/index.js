@@ -12,6 +12,7 @@ let state = {
   user: JSON.parse(localStorage.getItem("user")) || false, //用户信息
   searchHistory: JSON.parse(localStorage.getItem("search")) || [], //搜索记录
   addressInfo: JSON.parse(localStorage.getItem("addinfo")) || [], //地址信息
+  goodsOrder:[] //商品订单
 };
 
 export default new Vuex.Store({

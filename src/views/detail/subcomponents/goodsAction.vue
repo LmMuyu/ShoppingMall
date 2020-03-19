@@ -24,7 +24,7 @@ export default {
         this.$bus.$emit("valueers");
       }
 
-      this.$router.push(value).catch(err => {
+      this.$router.replace(value).catch(err => {
         err;
       });
     },

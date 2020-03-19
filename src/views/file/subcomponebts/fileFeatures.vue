@@ -57,7 +57,7 @@ export default {
       });
     },
     fileorder() {
-      this.$router.push("/file/fileorder");
+      this.$emit("fileorder")
     }
   }
 };

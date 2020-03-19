@@ -1,18 +1,18 @@
 <template>
   <transition
     enter-active-class="animated fadeInRight faster"
-    leave-active-class="animated fadeOutLeft faster"
-    :duration="{enter:'300',leave:'230'}"
+    leave-active-class="animated fadeOutRightBig faster"
+    :duration="{enter:100,leave:100}"
   >
     <div id="buy" style>
-      <buy-top-nav class="nav"/>
+      <buy-top-nav class="nav" />
       <Scroll class="scroll">
         <buy-address />
         <buy-info class="info" />
         <buy-discount class="discount" />
         <buyTotalPrice class="price" />
       </Scroll>
-      <buy-submit-bar class="ishebar" />
+      <buy-submit-bar class="ishebar" @submitOrders="submitOrders" />
     </div>
   </transition>
 </template>
@@ -25,7 +25,10 @@ import buyDiscount from "./childcomps/buyDiscount";
 import buyTotalPrice from "./childcomps/buyTotalPrice";
 import buySubmitBar from "./childcomps/buySubmitBar";
 
-import Scroll from "../../components/content/scroll/Scroll";
+import Scroll from "components/content/scroll/Scroll";
+
+import { GOODSORDER } from "@/store/murations-types";
+import { mapGetters } from "vuex";
 
 export default {
   name: "buy",
@@ -42,13 +45,19 @@ export default {
   data() {
     return {};
   },
-  created() {},
-  methods: {},
+  methods: {
+    submitOrders() {
+      this.$store.commit(GOODSORDER, this.information);
+    }
+  },
   mounted() {
     this.dsiplay();
   },
   beforeDestroy() {
     this.dsiplay();
+  },
+  computed: {
+    ...mapGetters(["information"])
   }
 };
 </script>
@@ -80,7 +89,7 @@ export default {
   z-index: 10;
   box-shadow: 0 -2px 1px #ff0000;
 }
-.nav{
+.nav {
   position: relative;
   z-index: 10;
   box-shadow: 0 2px 5px #fafafa;

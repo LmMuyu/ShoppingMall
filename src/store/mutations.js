@@ -8,7 +8,8 @@ import {
   ADDITION,
   ADDRESSINFO,
   EDITADDRESS,
-  REDUCEMONEY
+  REDUCEMONEY,
+  GOODSORDER
 } from "./murations-types";
 
 export default {
@@ -64,5 +65,8 @@ export default {
 
     addinfo.splice(payload.index, 1, payload.content);
     localStorage.setItem("addinfo", JSON.stringify(addinfo));
+  },
+  [GOODSORDER](state, payload) {
+    state.goodsOrder.unshift(payload);
   }
 };

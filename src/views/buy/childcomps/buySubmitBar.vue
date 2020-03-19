@@ -12,7 +12,7 @@ import { mapGetters } from "vuex";
 export default {
   methods: {
     wdaw() {
-      console.log(11);
+     this.$emit("submitOrders")
     }
   },
   computed: {

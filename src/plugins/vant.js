@@ -20,7 +20,13 @@ import { SubmitBar } from "vant";
 import { Popup } from "vant";
 import { AddressEdit } from "vant";
 import { Area } from "vant";
+import { Loading } from 'vant';
+import { Overlay } from 'vant';
+import { Skeleton } from 'vant';
 
+Vue.use(Skeleton);
+Vue.use(Overlay);
+Vue.use(Loading);
 Vue.use(Area);
 Vue.use(AddressEdit);
 Vue.use(Popup);

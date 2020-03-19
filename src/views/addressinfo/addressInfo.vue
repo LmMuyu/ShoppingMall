@@ -1,8 +1,8 @@
 <template>
   <transition
     enter-active-class="animated fadeInRight faster"
-    leave-active-class="animated fadeInLeft faster"
-    :duration="{enter:'300',leave:'300'}"
+    leave-active-class="animated fadeOutRightBig faster"
+    :duration="{enter:100,leave:100}"
   >
     <div id="addressinfo">
       <address-nav />

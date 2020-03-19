@@ -1,9 +1,25 @@
 <template>
   <div id="file">
-    <file-top-features />
-    <file-user-info />
-    <file-features class="isfeatures" />
-    <file-sign-out class="filesignout" @click.native="DeleteWebStorage" v-if="exithidden" v-ripple />
+    <div>
+      <file-top-features />
+      <file-user-info />
+      <file-features class="isfeatures" @fileorder="fileOrder" />
+      <file-sign-out
+        class="filesignout"
+        @click.native="DeleteWebStorage"
+        v-if="exithidden"
+        v-ripple
+      />
+    </div>
+
+    <transition
+      enter-active-class="animated fadeInRight faster"
+      leave-active-class="animated fadeOutRightBig faster"
+      :duration="{enter:100,leave:100}"
+      name="view"
+    >
+      <router-view class="view"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -57,7 +73,24 @@ export default {
       localStorage.getItem("user")
         ? (this.exithidden = true)
         : (this.exithidden = false);
+    },
+    fileOrder() {
+      this.$router.push("/file/fileorder").catch(err => {
+        err;
+      });
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    const frompath = from.path.split("/").length;
+    const topath = to.path.split("/").length;
+
+    if (topath > frompath) {
+      this.fuanimateclass = "animated fadeInLeft";
+    } else {
+      console.log(13);
+    }
+
+    next();
   }
 };
 </script>
@@ -72,5 +105,23 @@ export default {
 }
 .filesignout {
   margin-top: 25px;
+}
+/* .view-enter-active,
+.view-leave-active {
+  transition: opacity 0.5s;
+}
+.view-enter,
+.view-leave-to {
+  opacity: 0;
+} */
+.view {
+  height: 100vh;
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
 }
 </style>

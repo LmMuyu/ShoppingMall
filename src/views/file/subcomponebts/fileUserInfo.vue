@@ -3,7 +3,7 @@
     <div class="header">
       <span class="image">
         <img
-          :src="userInfo.avatar? userInfo.avatar:'../../../assets/images/login/loginPassword.svg'"
+          :src="userInfo.avatar? userInfo.avatar:'~assets/images/login/loginPassword.svg'"
           @click="picturePreview"
         />
       </span>

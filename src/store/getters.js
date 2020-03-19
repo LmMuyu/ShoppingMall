@@ -73,5 +73,8 @@ export default {
   },
   addressedit(state) {
     return state.addressInfo;
+  },
+  goodsorder(state) {
+    return state.goodsOrder;
   }
 };

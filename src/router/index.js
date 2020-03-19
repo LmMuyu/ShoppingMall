@@ -36,11 +36,18 @@ const routes = [
     path: "/file",
     name: "file",
     component: File,
+    meta:{
+      findName:"fadelnLeft",
+      comdisp:true
+    },
     children: [
       {
         path: "fileorder",
         name: "fileorder",
-        component: fileOrder
+        component: fileOrder,
+        meta:{
+          comdisp:false
+        }
       }
     ]
   },

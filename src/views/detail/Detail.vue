@@ -1,18 +1,22 @@
 <template>
   <div class="detail">
-    <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
-    <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
-      <detail-swiper :swiperimg="itemInfo" />
-      <detail-display-bar :goods="isgoods" />
-      <detail-information :business="business" />
-      <detail-goods-info :detailImage="detailImage" :desc="desc" @isimage="imageLoad" />
-      <detail-parameters ref="parameters" :parameters="parameters" :comment="comment" />
-      <comment ref="comment" :comment="comment" />
-      <goods-list ref="recommend" :goods="recommend" />
-    </scroll>
-    <back-top @click.native="backclick" v-show="show" class="backtop" />
-    <div class="actionis">
-      <goods-action @shopping="addshopping" class="action" @purchasePage="purchasee" />
+    <load-ing />
+    <skeleton-screen />
+    <div v-if="false">
+      <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
+      <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
+        <detail-swiper :swiperimg="itemInfo" />
+        <detail-display-bar :goods="isgoods" />
+        <detail-information :business="business" />
+        <detail-goods-info :detailImage="detailImage" :desc="desc" @isimage="imageLoad" />
+        <detail-parameters ref="parameters" :parameters="parameters" :comment="comment" />
+        <comment ref="comment" :comment="comment" />
+        <goods-list ref="recommend" :goods="recommend" />
+      </scroll>
+      <back-top @click.native="backclick" v-show="show" class="backtop" />
+      <div class="actionis">
+        <goods-action @shopping="addshopping" class="action" @purchasePage="purchasee" />
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +33,8 @@ import Comment from "./subcomponents/Comment";
 
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/content/scroll/Scroll";
+import loadIng from "components/content/loading/loadIng";
+import skeletonScreen from "../../components/content/skeletonscreen/skeletonScreen";
 
 import {
   getDetail,
@@ -72,7 +78,9 @@ export default {
     GoodsAction,
     GoodsList,
     Scroll,
-    Comment
+    Comment,
+    loadIng,
+    skeletonScreen
   },
   created() {
     this.iid = this.$route.params.iid;
