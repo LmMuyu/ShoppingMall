@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <keep-alive exclude="startling,registered,detail,login,searchfor,buy,addressinfo,addaddress">
-      <router-view v-if="isRouterAlive"></router-view>
-    </keep-alive>
+    <!-- <transition name="viewes"> -->
+      <keep-alive exclude="startling,registered,detail,login,searchfor,buy,addressinfo,addaddress">
+        <router-view v-if="isRouterAlive"></router-view>
+      </keep-alive>
+    <!-- </transition> -->
     <tab-bar class="tabbar" v-if="hidedTabBar"></tab-bar>
   </div>
 </template>
@@ -49,7 +51,14 @@ export default {
   position: relative;
   z-index: 9;
 }
-
+.viewes-enter-active,
+.viewes-leave-active {
+  transition: opacity 0.2s;
+}
+.viewes-enter,
+.viewes-leave-to {
+  opacity: 0;
+}
 @import "~assets/css/baess.css";
 @import "~assets/css/normalize.css";
 </style>

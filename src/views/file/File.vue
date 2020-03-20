@@ -56,18 +56,27 @@ export default {
       }
     },
     DeleteWebStorage() {
-      localStorage.removeItem("user");
-      //删除state中的用户信息
-      this.$store.commit(DELETEUSERS);
+      this.$Dialog
+        .confirm({
+          message: "确定退出登陆?"
+        })
+        .then(() => {
+          localStorage.removeItem("user");
+          //删除state中的用户信息
+          this.$store.commit(DELETEUSERS);
 
-      //点击退出后检查有没有删除成功
-      if (!localStorage.getItem("user")) {
-        this.$toast("已退出当前账号");
-        this.exithidden = false;
-        this.reload();
-      } else {
-        this.$toast("网络异常");
-      }
+          //点击退出后检查有没有删除成功
+          if (!localStorage.getItem("user")) {
+            this.$toast("已退出当前账号");
+            this.exithidden = false;
+            this.reload();
+          } else {
+            this.$toast("网络异常");
+          }
+        })
+        .catch(() => {
+          // on cancel
+        });
     },
     isexithidden() {
       localStorage.getItem("user")
@@ -80,14 +89,17 @@ export default {
       });
     }
   },
+  updated() {
+    localStorage.getItem("user");
+  },
   beforeRouteUpdate(to, from, next) {
     const frompath = from.path.split("/").length;
     const topath = to.path.split("/").length;
 
     if (topath > frompath) {
-      this.fuanimateclass = "animated fadeInLeft";
+      // this.fuanimateclass = "animated fadeInLeft";
     } else {
-      console.log(13);
+      // console.log(13);
     }
 
     next();
@@ -106,14 +118,14 @@ export default {
 .filesignout {
   margin-top: 25px;
 }
-/* .view-enter-active,
+.view-enter-active,
 .view-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.1s;
 }
 .view-enter,
 .view-leave-to {
   opacity: 0;
-} */
+}
 .view {
   height: 100vh;
   background-color: #f0f0f0;

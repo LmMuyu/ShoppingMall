@@ -1,28 +1,22 @@
 <template>
   <div class="loading">
-    <van-overlay :show="show" @click="show = false">
-      <div class="wrapper" @click.stop>
-        <van-loading color="#1989fa" />
-      </div>
-    </van-overlay>
+    <van-loading class="wrapper" size="64" color="#1989fa" />
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-      show: true
-    };
+    return {};
   }
 };
 </script>
 
 <style scoped>
 .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

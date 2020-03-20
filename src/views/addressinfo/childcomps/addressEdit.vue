@@ -18,7 +18,7 @@
 
 <script>
 import areaList from "assets/js/Area";
-import { EDITADDRESS } from "@/store/murations-types";
+import { EDITADDRESS, DELETEADDRESS } from "@/store/murations-types";
 
 export default {
   name: "addressedit",
@@ -78,8 +78,11 @@ export default {
           // on cancel
         });
     },
-    onDelete() {
-      // Toast('delete');
+    onDelete(content) {
+      this.$store.dispatch(DELETEADDRESS, content.id).then(value => {
+        this.$toast(value);
+        this.$router.back();
+      });
     },
     onChangeDetail(val) {
       if (val) {

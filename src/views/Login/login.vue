@@ -9,7 +9,10 @@ import LoginComponent from "./subcomponents/LoginComponent";
 
 export default {
   components: {
-    LoginComponent,
+    LoginComponent
+  },
+  updated() {
+    localStorage.getItem("user");
   }
 };
 </script>

@@ -1,4 +1,8 @@
-import { SEARCHHISTORY, EDITADDRESS } from "./murations-types.js";
+import {
+  SEARCHHISTORY,
+  EDITADDRESS,
+  DELETEADDRESS
+} from "./murations-types.js";
 
 export default {
   addcart(context, payload) {
@@ -39,8 +43,6 @@ export default {
     context.commit(SEARCHHISTORY, hisrecord);
   },
   [EDITADDRESS](context, payload) {
-    console.log(payload);
-
     const addinfo = context.state.addressInfo;
 
     if (payload["content"].isDefault === true) {
@@ -51,5 +53,15 @@ export default {
     } else {
       context.commit(EDITADDRESS, payload);
     }
+  },
+  [DELETEADDRESS](context, payload) {
+    return new Promise(resolve => {
+      const index = context.state.addressInfo.findIndex(item => {
+        return item.id === payload;
+      });
+      context.commit(DELETEADDRESS, index);
+
+      resolve("删除成功");
+    });
   }
 };

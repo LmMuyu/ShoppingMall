@@ -37,12 +37,11 @@ export default {
   },
   methods: {
     returns() {
-      this.$bus.$emit("statuschange"); //src\views\category\category.vue
-      this.$router.push("/category");
+      this.$router.back();
     },
     searchFor() {
       this.$store.dispatch(SEARCHHISTORY, this.value);
-      this.value = ""
+      this.value = "";
     }
   }
 };

@@ -20,7 +20,19 @@ export default {
   },
   methods: {
     back() {
-      this.$router.back();
+      if (this.$route.path === "/addressinfo/addressedit") {
+        this.$Dialog.confirm({
+          message: "是否放弃本次编辑?"
+        })
+          .then(() => {
+            this.$router.back();
+          })
+          .catch(() => {
+            // on cancel
+          });
+      } else {
+        this.$router.back();
+      }
     }
   }
 };

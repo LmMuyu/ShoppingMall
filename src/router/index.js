@@ -36,17 +36,17 @@ const routes = [
     path: "/file",
     name: "file",
     component: File,
-    meta:{
-      findName:"fadelnLeft",
-      comdisp:true
+    meta: {
+      findName: "fadelnLeft",
+      comdisp: true
     },
     children: [
       {
         path: "fileorder",
         name: "fileorder",
         component: fileOrder,
-        meta:{
-          comdisp:false
+        meta: {
+          comdisp: false
         }
       }
     ]
@@ -60,11 +60,17 @@ const routes = [
     path: "/category",
     name: "category",
     component: Category,
+    meta: {
+      comdisp: true
+    },
     children: [
       {
         path: "searchfor",
         name: "searchfor",
-        component: CategorySearchFor
+        component: CategorySearchFor,
+        meta: {
+          comdisp: false
+        }
       }
     ]
   },
@@ -97,11 +103,17 @@ const routes = [
     path: "/addressinfo",
     name: "addressinfo",
     component: addressInfo,
+    meta: {
+      comdisp: true
+    },
     children: [
       {
         path: "addaddress",
         name: "addaddress",
-        component: addAddress
+        component: addAddress,
+        meta: {
+          comdisp: false
+        }
       },
       {
         path: "addressedit",

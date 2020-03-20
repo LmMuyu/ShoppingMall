@@ -1,8 +1,10 @@
 <template>
   <div class="detail">
-    <load-ing />
-    <skeleton-screen />
-    <div v-if="false">
+    <div v-if="loading">
+      <load-ing />
+      <skeleton-screen />
+    </div>
+    <div v-else>
       <detail-nav-bar class="isnavbar" :titleNavbar="titleNavbar" @index="scrolltoys" ref="nav" />
       <scroll class="iswiaperr" ref="scroll" @monitor="monitores" :probeType="3">
         <detail-swiper :swiperimg="itemInfo" />
@@ -65,7 +67,7 @@ export default {
       themeTopYs: [], //滚到内容组件的位置:Y值
       themeTopy: null,
       indexis: 0, //滚动
-      positionY: 0 //储存Y值
+      loading: true //加载中
     };
   },
   components: {
@@ -99,8 +101,10 @@ export default {
     });
   },
   methods: {
-    getDetail() {
-      getDetail(this.iid).then(res => {
+    async getDetail() {
+      this.loading = true;
+      await getDetail(this.iid).then(res => {
+        this.loading = false;
         const data = res.result;
         //轮播图片
         this.itemInfo = data.itemInfo.topImages;
@@ -156,8 +160,6 @@ export default {
 
       //返回顶部图标隐藏或显示
       position < -300 ? (this.show = true) : (this.show = false);
-
-      this.positionY = position;
     },
     //加入购物车获取单个商品参数
     addshopping() {
@@ -171,9 +173,6 @@ export default {
       goodsdata.date = Date.now();
 
       this.$store.dispatch("addcart", goodsdata);
-    },
-    pagePposition() {
-      this.$refs.scroll.scroll.scrollTo(0, this.positionY, 0);
     },
     purchasee() {
       const goodsdata = {};
@@ -195,8 +194,8 @@ export default {
       this.$router.push("/buy");
     }
   },
-  mounted() {
-    this.pagePposition();
+  watch: {
+    $route: getDetail
   }
 };
 </script>

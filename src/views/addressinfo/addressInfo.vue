@@ -5,10 +5,17 @@
     :duration="{enter:100,leave:100}"
   >
     <div id="addressinfo">
-      <address-nav />
-      <addressinfo-main-body @hineus="hineis" v-if="hine" />
-      <transition enter-active-class="animated fadeInRight faster" :duration="3000">
-        <router-view></router-view>
+      <address-nav class="addressnav" />
+      <div v-if="this.$route.meta.comdisp">
+        <addressinfo-main-body @hineus="hineis" class="mainbody" />
+      </div>
+
+      <transition
+        enter-active-class="animated fadeInRight faster"
+        leave-active-class="animated fadeOutRightBig faster"
+        :duration="{enter:100,leave:100}"
+      >
+        <router-view class="view"></router-view>
       </transition>
     </div>
   </transition>
@@ -25,9 +32,7 @@ export default {
     addressNav
   },
   data() {
-    return {
-      hine: true
-    };
+    return {};
   },
   methods: {
     hineis() {
@@ -38,8 +43,6 @@ export default {
   },
   mounted() {
     this.$bus.$on("addressedit", (item, index) => {
-      // console.log(item, index);
-
       this.$router
         .push({
           path: "/addressinfo/addressedit",
@@ -54,9 +57,6 @@ export default {
           err;
         });
     });
-  },
-  beforeUpdate() {
-    this.hine = !this.hine;
   }
 };
 </script>
@@ -67,5 +67,20 @@ export default {
   z-index: 10;
   height: 100vh;
   background-color: #ffffff;
+}
+.addressnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0
+}
+.view,
+.mainbody {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 </style>

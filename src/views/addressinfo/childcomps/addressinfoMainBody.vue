@@ -29,8 +29,6 @@ export default {
       this.$emit("hineus");
     },
     edit(_item, index) {
-      console.log(index);
-
       this.$bus.$emit("addressedit", this.addressedit[index], index); //地址信息 //src\views\addressinfo\addressInfo.vue
     }
   },

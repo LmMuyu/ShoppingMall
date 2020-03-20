@@ -1,6 +1,6 @@
 <template>
   <div id="category">
-    <div v-if="classification">
+    <div v-if="this.$route.meta.comdisp">
       <category-head class="categoryhead" @searchfor="isSearchfor" />
       <category-left-menu :categoryTitle="categoryTitle" @menuvlaue="vlaueidnex" class="leftmenu" />
       <scroll class="scroll" ref="scroll">
@@ -8,9 +8,8 @@
         <category-goods class="isgoods" :categoryleftmenudata="categoryShowGoods" />
       </scroll>
     </div>
-    <div v-else>
-      <router-view></router-view>
-    </div>
+
+    <router-view class="view"></router-view>
   </div>
 </template>
 
@@ -24,7 +23,7 @@ import Scroll from "components/content/scroll/Scroll";
 
 import { getCategory, getSubcategory } from "network/category";
 import { debounce } from "common/debounce.js";
-//getSubcategory
+
 export default {
   components: {
     categoryLeftMenu,
@@ -41,7 +40,6 @@ export default {
         categorytitle: "",
         categoryleftmenudata: []
       },
-      classification: true, //本组件显示隐藏
       goodsData: [],
       goodsShow: {}
     };
@@ -80,7 +78,6 @@ export default {
     },
     isSearchfor() {
       this.$router.push("category/searchfor");
-      this.classification = false;
     }
   },
   mounted() {
@@ -88,10 +85,6 @@ export default {
       let imgload = debounce(this.$refs.scroll.refresh, 150);
 
       imgload();
-    });
-
-    this.$bus.$on("statuschange", () => {
-      this.classification = true;
     });
   },
   watch: {
@@ -118,5 +111,13 @@ export default {
   left: 110px;
   bottom: 50px;
   /* background-color: rgb(255, 0, 0); */
+}
+.view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
 }
 </style>

@@ -62,7 +62,9 @@ export default {
           message: "确定创建新的地址?"
         })
         .then(() => {
-          this.$store.commit(ADDRESSINFO, content);
+          //地址创建成功后返回父路由
+          this.$store.commit(ADDRESSINFO, content);  
+          this.$router.back();
         })
         .catch(() => {
           // on cancel
