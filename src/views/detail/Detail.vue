@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <div v-if="loading">
-      <load-ing />
+      <load-ing class="loading" />
       <skeleton-screen />
     </div>
     <div v-else>
@@ -17,7 +17,13 @@
       </scroll>
       <back-top @click.native="backclick" v-show="show" class="backtop" />
       <div class="actionis">
-        <goods-action @shopping="addshopping" class="action" @purchasePage="purchasee" />
+        <goods-action
+          @shopping="addshopping"
+          class="action"
+          @purchasePage="purchasee"
+          @favorites="favorites"
+          :favor="favor"
+        />
       </div>
     </div>
   </div>
@@ -47,7 +53,12 @@ import {
 } from "network/detail";
 import { debounce } from "common/debounce";
 import { backtopmixin } from "common/mixin.js";
-import { INFORMATION } from "@/store/murations-types";
+import {
+  INFORMATION,
+  FAVORITE,
+  CANCELCOLLECTION
+} from "@/store/murations-types";
+import { mapGetters } from "vuex";
 
 export default {
   name: "detail",
@@ -67,7 +78,8 @@ export default {
       themeTopYs: [], //滚到内容组件的位置:Y值
       themeTopy: null,
       indexis: 0, //滚动
-      loading: true //加载中
+      loading: true, //加载中
+      favor: null //收藏
     };
   },
   components: {
@@ -85,7 +97,7 @@ export default {
     skeletonScreen
   },
   created() {
-    this.iid = this.$route.params.iid;
+    this.iid = this.$route.query.iid;
     this.getDetail();
     this.getDetailRecommend();
 
@@ -99,11 +111,15 @@ export default {
         this.themeTopYs.push(Number.MAX_VALUE);
       }, 150);
     });
+
+    this.isFavorite(); //收藏
   },
   methods: {
     async getDetail() {
       this.loading = true;
       await getDetail(this.iid).then(res => {
+        // console.log(res);
+
         this.loading = false;
         const data = res.result;
         //轮播图片
@@ -192,15 +208,59 @@ export default {
       this.$store.commit(INFORMATION, goodsdata);
 
       this.$router.push("/buy");
+    },
+    favorites(value) {
+      if (value) {
+        this.$store.dispatch(CANCELCOLLECTION, this.iid).then(value => {
+          this.$toast(value);
+        });
+      } else {
+        const favorite = {};
+
+        //id
+        favorite.iid = this.iid;
+        //照片
+        favorite.goodsimage = this.detailImage[0];
+        //店名
+        favorite.business = this.business.name;
+        //描述
+        favorite.desc = this.desc.desc;
+        //收藏
+        favorite.favoriteclass = true;
+
+        this.$store.dispatch(FAVORITE, favorite).then(value => {
+          this.$toast(value);
+        });
+      }
+    },
+    isFavorite() {
+      const fav = this.favorite.find(item => {
+        return item.iid === this.iid;
+      });
+
+      if (!fav) {
+        this.favor = false;
+      } else {
+        this.favor = true;
+      }
     }
   },
+  computed: {
+    ...mapGetters(["favorite"])
+  },
   watch: {
-    $route: getDetail
+    $route: getDetail,
+    favorite() {
+      this.isFavorite();
+    }
   }
 };
 </script>
 
 <style scoped>
+.loading {
+  z-index: 999;
+}
 .detail {
   position: relative;
   z-index: 20;

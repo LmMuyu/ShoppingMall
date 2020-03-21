@@ -9,7 +9,7 @@
         <img src="~assets/images/arrow.svg" alt />
       </span>
     </div>
-    <div class="features" v-ripple>
+    <div class="features" v-ripple @click="favorite">
       <span class="favorite">
         <img src="~assets/images/fileFavorite.svg" alt />
         <span class="font">收藏</span>
@@ -58,6 +58,9 @@ export default {
     },
     fileorder() {
       this.$emit("fileorder")
+    },
+    favorite(){
+      this.$emit("favorite")
     }
   }
 };

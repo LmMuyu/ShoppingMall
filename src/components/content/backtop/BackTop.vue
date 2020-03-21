@@ -1,7 +1,12 @@
 <template>
-  <div class="backtop">
-    <img src="~assets/images/backtop.svg" alt />
-  </div>
+  <transition
+    enter-active-class="animated fadeInUp faster"
+    leave-active-class="animated fadeOutDown faster"
+  >
+    <div class="backtop">
+      <img src="~assets/images/backtop.svg" alt />
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -18,6 +23,6 @@ export default {
   right: 8px;
   bottom: 64px;
   background-color: #ffffff;
-  border-radius: 100%
+  border-radius: 100%;
 }
 </style>

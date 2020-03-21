@@ -17,7 +17,7 @@ export default {
       default: 0
     },
     PullUpLoading: {
-      type: Boolean,
+      type: Boolean || Object,
       default: false
     },
     fade: {
@@ -39,7 +39,7 @@ export default {
     },
     finishPullUp() {
       this.scroll.finishPullUp();
-      this.refresh();
+      this.scroll.refresh();
     },
     refresh() {
       this.scroll.refresh();
@@ -53,9 +53,7 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click: true,
       probeType: this.probeType,
-      pullUpLoad: this.PullUpLoading || {
-        threshold: -50
-      },
+      pullUpLoad: this.PullUpLoading,
       scrollbar: this.fade //是否开启滚动条
     });
     //监听滚动并将y值传出

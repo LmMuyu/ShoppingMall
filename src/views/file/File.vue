@@ -3,7 +3,7 @@
     <div>
       <file-top-features />
       <file-user-info />
-      <file-features class="isfeatures" @fileorder="fileOrder" />
+      <file-features class="isfeatures" @fileorder="fileOrder" @favorite="favorite" />
       <file-sign-out
         class="filesignout"
         @click.native="DeleteWebStorage"
@@ -87,6 +87,15 @@ export default {
       this.$router.push("/file/fileorder").catch(err => {
         err;
       });
+    },
+    favorite() {
+      this.$router
+        .push({
+          path: "/file/favorite"
+        })
+        .catch(err => {
+          err;
+        });
     }
   },
   updated() {
@@ -128,7 +137,7 @@ export default {
 }
 .view {
   height: 100vh;
-  background-color: #f0f0f0;
+  background-color: #fafafa;
   position: absolute;
   top: 0;
   left: 0;

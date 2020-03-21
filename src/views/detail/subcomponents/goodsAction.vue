@@ -3,6 +3,12 @@
     <van-goods-action class="vangoodsaction">
       <van-goods-action-icon icon="chat-o" text="客服" />
       <van-goods-action-icon icon="cart-o" text="购物车" @click="RouterJump('/shoppingcart')" />
+      <van-goods-action-icon
+        icon="star"
+        :text="favor === false ? '收藏': '已收藏'"
+        :color="favor === false ? '':'#ff5000'"
+        @click="favorites"
+      />
       <van-goods-action-button type="warning" text="加入购物车" @click="shopping" />
       <van-goods-action-button type="danger" text="立即购买" @click="purchasePage" />
     </van-goods-action>
@@ -11,6 +17,15 @@
 
 <script>
 export default {
+  props: {
+    favor: {
+      //是否显示收藏   默认false:不收藏
+      type: Boolean,
+      default() {
+        return false;
+      }
+    }
+  },
   methods: {
     shopping() {
       if (localStorage.getItem("user")) {
@@ -49,6 +64,9 @@ export default {
       }
 
       this.$emit("purchasePage");
+    },
+    favorites() {
+      this.$emit("favorites",this.favor);
     }
   }
 };

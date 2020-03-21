@@ -83,12 +83,8 @@ export default {
   },
   created() {
     //轮播图和DisplayBar组件数据
-    this.getHomeMultidata();
-
     //请求商品数据
-    this.getHomeGoodsdata("pop");
-    this.getHomeGoodsdata("new");
-    this.getHomeGoodsdata("sell");
+    this.getData();
   },
   methods: {
     /**
@@ -107,6 +103,7 @@ export default {
         // console.log(res);
         res.list &&
           this.goods[type].list &&
+          //核心
           this.goods[type].list.push(...res.list);
         this.goods[type].page += 1;
       });
@@ -137,6 +134,21 @@ export default {
     iswiper() {
       //TabControl组件吸顶
       this.topoffsetTop = this.$refs.tabcontrol.$el.offsetTop;
+    },
+    getData() {
+      if (this.goods["new"].list.length === 0) {
+        this.getHomeGoodsdata("pop");
+        this.getHomeGoodsdata("new");
+        this.getHomeGoodsdata("sell");
+
+        if (this.swipeimg.length === 0) {
+          this.getHomeMultidata();
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
     }
   },
   mounted() {

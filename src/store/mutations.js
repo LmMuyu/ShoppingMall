@@ -10,7 +10,9 @@ import {
   EDITADDRESS,
   REDUCEMONEY,
   GOODSORDER,
-  DELETEADDRESS
+  DELETEADDRESS,
+  FAVORITE,
+  CANCELCOLLECTION
 } from "./murations-types";
 
 export default {
@@ -75,5 +77,11 @@ export default {
     address.splice(payload, 1);
 
     localStorage.setItem("addinfo", JSON.stringify(address));
+  },
+  [FAVORITE](state, payload) {
+    state.favorite.push(payload);
+  },
+  [CANCELCOLLECTION](state, payload) {
+    state.favorite.splice(payload, 1);
   }
 };

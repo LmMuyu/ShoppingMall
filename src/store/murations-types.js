@@ -10,3 +10,5 @@ export const EDITADDRESS = "editaddress";
 export const REDUCEMONEY = "reducemoney";
 export const GOODSORDER = "goodsorder"
 export const DELETEADDRESS="deleteaddress"
+export const FAVORITE = "favorite"
+export const CANCELCOLLECTION="cancelcollection"

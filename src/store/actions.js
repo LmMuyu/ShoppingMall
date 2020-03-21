@@ -1,7 +1,9 @@
 import {
   SEARCHHISTORY,
   EDITADDRESS,
-  DELETEADDRESS
+  DELETEADDRESS,
+  CANCELCOLLECTION,
+  FAVORITE
 } from "./murations-types.js";
 
 export default {
@@ -62,6 +64,23 @@ export default {
       context.commit(DELETEADDRESS, index);
 
       resolve("删除成功");
+    });
+  },
+  [CANCELCOLLECTION](context, payload) {
+    return new Promise(resolve => {
+      const favor = context.state.favorite.findIndex(item => {
+        return item.iid === payload;
+      });
+      context.commit(CANCELCOLLECTION, favor);
+
+      resolve("取消收藏");
+    });
+  },
+  [FAVORITE](context, payload) {
+    return new Promise(resolve => {
+      context.commit(FAVORITE, payload);
+
+      resolve("已收藏");
     });
   }
 };

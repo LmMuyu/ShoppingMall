@@ -76,5 +76,8 @@ export default {
   },
   goodsorder(state) {
     return state.goodsOrder;
+  },
+  favorite(state){
+    return state.favorite
   }
 };

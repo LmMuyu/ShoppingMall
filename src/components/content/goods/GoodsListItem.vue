@@ -26,7 +26,13 @@ export default {
       this.$bus.$emit("imgcomplete");
     },
     DetailJump() {
-      this.$router.push(`/detail/${this.goodsitem.iid}`);
+      const iid = this.goodsitem.iid;
+      this.$router.push({
+        path: "/detail",
+        query: {
+          iid
+        }
+      });
     }
   },
   mounted() {
