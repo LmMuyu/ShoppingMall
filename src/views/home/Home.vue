@@ -136,11 +136,15 @@ export default {
       this.topoffsetTop = this.$refs.tabcontrol.$el.offsetTop;
     },
     getData() {
+      //主要是为了每次离开home主页再回来时再次发送请求,防止服务器负担过重
+
+      //当this.goods["new"].list的长度等于0时,向后台发送请求获取数据
       if (this.goods["new"].list.length === 0) {
         this.getHomeGoodsdata("pop");
         this.getHomeGoodsdata("new");
         this.getHomeGoodsdata("sell");
 
+        //当this.swipeimg的长度等于0时,向后台发送请求获取数据
         if (this.swipeimg.length === 0) {
           this.getHomeMultidata();
         } else {
