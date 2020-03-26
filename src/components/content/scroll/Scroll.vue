@@ -8,22 +8,34 @@
 
 <script>
 import BScroll from "better-scroll";
+// import { throttle } from "common/throttle";
 
 export default {
   name: "scroll",
   props: {
     probeType: {
       type: Number,
-      default: 0
+      default() {
+        return 0;
+      }
     },
     PullUpLoading: {
-      type: Boolean || Object,
-      default: false
+      //上啦阈值
+      type: Object,
+      default() {
+        return {};
+      }
     },
     fade: {
       type: Boolean,
       default() {
         return false;
+      }
+    },
+    bounce: {
+      type: Boolean,
+      default() {
+        return true;
       }
     }
   },
@@ -37,10 +49,12 @@ export default {
     scrollTo(time = "800") {
       this.scroll.scrollTo(0, 0, time);
     },
+    //上拉加载
     finishPullUp() {
       this.scroll.finishPullUp();
       this.scroll.refresh();
     },
+    //重新刷新滚动高度
     refresh() {
       this.scroll.refresh();
     },
@@ -51,10 +65,12 @@ export default {
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
-      click: true,
-      probeType: this.probeType,
-      pullUpLoad: this.PullUpLoading,
-      scrollbar: this.fade //是否开启滚动条
+      click: true, //开启点击事件
+      probeType: this.probeType, //开启实时滚动的位置
+      pullUpLoad: this.PullUpLoading, //上拉加载
+      scrollbar: this.fade, //是否开启滚动条
+      mouseWheel: true, //在PC端使用,鼠标无法实现滚动的解决办法
+      bounce: this.bounce //当滚动超过边缘的时候会有一小段回弹动画
     });
     //监听滚动并将y值传出
     this.scroll.on("scroll", position => {

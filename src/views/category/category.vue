@@ -1,12 +1,22 @@
 <template>
   <div id="category">
-    <div v-if="this.$route.meta.comdisp">
-      <category-head class="categoryhead" @searchfor="isSearchfor" />
-      <category-left-menu :categoryTitle="categoryTitle" @menuvlaue="vlaueidnex" class="leftmenu" />
-      <scroll class="scroll" ref="scroll">
-        <category-swiper />
-        <category-goods class="isgoods" :categoryleftmenudata="categoryShowGoods" />
-      </scroll>
+    <div v-if="loding">
+      <lod-ing />
+    </div>
+
+    <div v-if="!loding">
+      <div v-if="this.$route.meta.comdisp">
+        <category-head class="categoryhead" @searchfor="isSearchfor" />
+        <category-left-menu
+          :categoryTitle="categoryTitle"
+          @menuvlaue="vlaueidnex"
+          class="leftmenu"
+        />
+        <scroll class="scroll" ref="scroll" :bounce="false">
+          <category-swiper :SwiperData="categorySwiperData" />
+          <category-goods class="isgoods" :categoryleftmenudata="categoryShowGoods" />
+        </scroll>
+      </div>
     </div>
 
     <router-view class="view"></router-view>
@@ -19,10 +29,11 @@ import categoryHead from "./subcomponents/categoryHead";
 import categoryGoods from "./subcomponents/categoryGoods";
 import categorySwiper from "./subcomponents/categorySwiper";
 
+import lodIng from "components/content/loading/loadIng";
 import Scroll from "components/content/scroll/Scroll";
 
 import { getCategory, getSubcategory } from "network/category";
-import { debounce } from "common/debounce.js";
+// import { debounce } from "common/debounce.js";
 
 export default {
   components: {
@@ -30,63 +41,60 @@ export default {
     categoryHead,
     categoryGoods,
     categorySwiper,
-    Scroll
+    Scroll,
+    lodIng
   },
   data() {
     return {
       categoryTitle: [], //axios请求的数据
+      categorySwiperData: [], //轮播图数据
       categoryShowGoods: {
         //分类数据
         categorytitle: "",
         categoryleftmenudata: []
       },
       goodsData: [],
-      goodsShow: {}
+      goodsShow: {},
+      loding: true
     };
   },
   created() {
-    this.getCategory();
-    this.vlaueidnex();
+    this.categorydata();
   },
   methods: {
     getCategory() {
       //数据请求
-      getCategory().then(res => {
-        console.log(res.category);
-        this.categoryTitle = res.category.list;
-
-        if (res) {
-          for (const val of res.list) {
-            this.goodsData.push(val.maitKey);
-          }
-        }
-
-        if (this.goodsData.lenght !== 0) {
-          this.goodsData.forEach(item => {
-            this.goodsShow[item] = [];
-          });
-        }
+      getCategory().then(({ category }) => {
+        // console.log(category);
+        this.categoryTitle = category.list;
       });
     },
     vlaueidnex(maitKey = 3627) {
-      getSubcategory(maitKey).then(res => {
-        // console.log(res);
+      getSubcategory(maitKey).then(({ info, list }) => {
+        this.loding = false
+        const goods = this.categoryShowGoods;
 
-        this.categoryShowGoods.categorytitle = res.info.title;
-        this.categoryShowGoods.categoryleftmenudata = res.list;
+        goods.categorytitle = info.title;
+        goods.categoryleftmenudata = list;
+
+        for (let index = 0; index < 3; index++) {
+          this.categorySwiperData.push(list[index]);
+        }
       });
     },
     isSearchfor() {
-      this.$router.push("category/searchfor");
+      this.$router.push("category/searchfor").catch(err => {
+        err;
+      });
+    },
+    categorydata() {
+      if (this.categoryTitle.length === 0) {
+        this.getCategory();
+        this.vlaueidnex();
+      }
     }
   },
-  mounted() {
-    this.$bus.$on("imageload", () => {
-      let imgload = debounce(this.$refs.scroll.refresh, 150);
-
-      imgload();
-    });
-  },
+  mounted() {},
   watch: {
     deep: true
   }

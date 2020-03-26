@@ -11,6 +11,7 @@ import ViewUI from "view-design";
 import "view-design/dist/styles/iview.css";
 import vuetify from "./plugins/vuetify";
 import FastClick from "fastclick";
+import "swiper/css/swiper.css";
 
 Vue.config.productionTip = false;
 Vue.prototype.$bus = new Vue();

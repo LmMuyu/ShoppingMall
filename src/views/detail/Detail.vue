@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <div v-if="loading">
-      <load-ing class="loading" />
+      <load-ing class="loading" :size="32" />
       <skeleton-screen />
     </div>
     <div v-else>

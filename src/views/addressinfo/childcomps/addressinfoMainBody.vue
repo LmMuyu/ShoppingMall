@@ -20,9 +20,12 @@ export default {
   name: "addaddress",
   data() {
     return {
-      chosenAddressId: "", //默认地址
+      chosenAddressId: 1, //默认地址
       list: []
     };
+  },
+  created() {
+    this.watchaddress();
   },
   methods: {
     addaddress() {
@@ -30,6 +33,12 @@ export default {
     },
     edit(_item, index) {
       this.$bus.$emit("addressedit", this.addressedit[index], index); //地址信息 //src\views\addressinfo\addressInfo.vue
+    },
+    watchaddress() {
+      const id = this.addinfo.findIndex(item => {
+        return item.isDefault === true;
+      });
+      this.chosenAddressId = id + 1;
     }
   },
   mounted() {
@@ -39,11 +48,10 @@ export default {
     ...mapGetters(["addinfo", "addressedit"])
   },
   watch: {
-    list() {
-      const id = this.list.findIndex(item => {
-        return Boolean(item.isDefault) === true;
-      });
-      this.chosenAddressId = id + 1;
+    list(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.watchaddress();
+      }
     },
     deep: true
   }

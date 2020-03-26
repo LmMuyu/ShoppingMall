@@ -1,11 +1,19 @@
 <template>
   <div class="loading">
-    <van-loading class="wrapper" size="64" color="#1989fa" />
+    <van-loading class="wrapper" :size="size" color="#1989fa" />
   </div>
 </template>
 
 <script>
 export default {
+  props:{
+    size:{
+      type:Number,
+      default(){
+        return 16
+      }
+    }
+  },
   data() {
     return {};
   }

@@ -1,10 +1,8 @@
 <template>
   <div id="app">
-    <!-- <transition name="viewes"> -->
-      <keep-alive exclude="startling,registered,detail,login,searchfor,buy,addressinfo,addaddress">
-        <router-view v-if="isRouterAlive"></router-view>
-      </keep-alive>
-    <!-- </transition> -->
+    <keep-alive exclude="startling,registered,detail,login,searchfor,buy,addressinfo,addaddress">
+      <router-view v-if="isRouterAlive"></router-view>
+    </keep-alive>
     <tab-bar class="tabbar" v-if="hidedTabBar"></tab-bar>
   </div>
 </template>
@@ -58,6 +56,9 @@ export default {
 .viewes-enter,
 .viewes-leave-to {
   opacity: 0;
+}
+.swiper-container {
+  height: 100vh;
 }
 @import "~assets/css/baess.css";
 @import "~assets/css/normalize.css";

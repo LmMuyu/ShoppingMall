@@ -1,12 +1,7 @@
 <template>
-  <transition
-    enter-active-class="animated fadeInUp faster"
-    leave-active-class="animated fadeOutDown faster"
-  >
-    <div class="backtop">
-      <img src="~assets/images/backtop.svg" alt />
-    </div>
-  </transition>
+  <div class="backtop">
+    <img src="~assets/images/backtop.svg" alt />
+  </div>
 </template>
 
 <script>

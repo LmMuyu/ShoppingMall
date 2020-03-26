@@ -29,9 +29,6 @@ const CategorySearchFor = () =>
 const loginRegistered = () =>
   import("views/Login/subcomponents/loginRegistered");
 
-
-
-
 const routes = [
   {
     path: "",

@@ -29,7 +29,7 @@ export default {
   height: 49px;
   line-height: 49px;
   width: 100%;
-  background-color: #f8beb3;
+  background-color: #ffffff;
 }
 .cartzong {
   font-weight: bolder;

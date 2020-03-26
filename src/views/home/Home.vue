@@ -1,25 +1,25 @@
 <template>
   <div class="home">
-    <nav-bar class="navbar">
-      <div slot="center">
-        <Input search placeholder="搜索商品" size="default" v-model="searchFor" />
-      </div>
-    </nav-bar>
     <tab-control
       :tabcontroltitle="tabcontroltitle"
       @iscontrolvalue="controldata"
-      :class="{fixeds:true}"
+      class="fixeds"
       ref="istabcontrol"
       v-show="topnav"
     />
     <scroll
-      :class="{content:true}"
+      class="content"
       ref="scroll"
       :probeType="3"
-      :PullUpLoading="true"
+      :PullUpLoading="threshold"
       @monitor="isposition"
       @PullUp="loadMore"
     >
+      <nav-bar class="navbar">
+        <div slot="center">
+          <Input search placeholder="搜索商品" size="default" v-model="searchFor" />
+        </div>
+      </nav-bar>
       <home-swipe :swipeimg="swipeimg" @swiperLoad="iswiper" class="swiper" />
       <display-bar :displaybarimg="displaybarimg" />
       <!-- <recom-class /> -->
@@ -28,7 +28,18 @@
         @iscontrolvalue="controldata"
         ref="tabcontrol"
       />
-      <goods-list :goods="isgoods" />
+      <swiper ref="swiper">
+        <div slot="swiper1">
+          <goods-list :goods="goods['pop'].list" />
+        </div>
+        <div slot="swiper2">
+          <goods-list :goods="goods['new'].list" />
+        </div>
+        <div slot="swiper3">
+          <goods-list :goods="goods['sell'].list" />
+        </div>
+      </swiper>
+      <load-ing class="loading" :size="24" />
     </scroll>
     <back-top @click.native="backclick" v-show="show" />
   </div>
@@ -36,6 +47,8 @@
 
 <script>
 //公共,业务组件
+import Swiper from "components/content/swiper/Swiper";
+import loadIng from "components/content/loading/loadIng";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
@@ -58,7 +71,9 @@ export default {
     // RecomClass,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    loadIng,
+    Swiper
   },
   data() {
     return {
@@ -72,7 +87,6 @@ export default {
       },
       tabcontroltitle: ["流行", "新款", "精选"],
       goodsindex: 0,
-
       commodity: ["pop", "new", "sell"],
       controlvalue: 0,
       topoffsetTop: 0, //储存组件TabControl的offsetTop
@@ -91,20 +105,18 @@ export default {
      * 数据
      */
     getHomeMultidata() {
-      getHomeMultidata().then(res => {
+      getHomeMultidata().then(({ banner, recommend }) => {
         // console.log(res);
-        this.swipeimg = res.banner.list;
-        this.displaybarimg = res.recommend.list;
+        this.swipeimg = banner.list;
+        this.displaybarimg = recommend.list;
       });
     },
     getHomeGoodsdata(type) {
       const page = this.goods[type].page;
-      getHomeGoodsdata(type, page).then(res => {
+      getHomeGoodsdata(type, page).then(({ list }) => {
         // console.log(res);
-        res.list &&
-          this.goods[type].list &&
-          //核心
-          this.goods[type].list.push(...res.list);
+        //核心
+        this.goods[type].list.push(...list);
         this.goods[type].page += 1;
       });
     },
@@ -114,10 +126,10 @@ export default {
      */
     controldata(value) {
       this.controlvalue = value;
-
       //同步两个相同组件内的indexs值
-      this.$refs.tabcontrol.indexs = this.controlvalue;
-      this.$refs.istabcontrol.indexs = this.controlvalue;
+      this.$refs.tabcontrol.indexs = this.$refs.istabcontrol.indexs = this.controlvalue;
+
+      this.swiper.slideTo(value, 200, false);
     },
     isposition(position) {
       //返回头部图标隐藏或显示
@@ -127,9 +139,8 @@ export default {
       this.topnav = -position > this.topoffsetTop;
     },
     loadMore() {
-      //上拉加载更多
+      //上拉加载更多数据
       this.getHomeGoodsdata(this.wares);
-      this.$refs.scroll.finishPullUp();
     },
     iswiper() {
       //TabControl组件吸顶
@@ -156,9 +167,15 @@ export default {
     }
   },
   mounted() {
-    this.$bus.$on("imgcomplete", () => {
-      // this.scroll.refresh();
-      //console.log(1111);
+    //商品展示左右滑动
+    this.$bus.$on("slichtrst", index => {
+      this.$refs.tabcontrol.indexs = this.$refs.istabcontrol.indexs = index;
+      this.$refs.scroll.refresh();
+    });
+
+    this.$bus.$on("activeindex", index => {
+      this.$refs.tabcontrol.indexs = this.$refs.istabcontrol.indexs = index;
+      this.$refs.tabcontrol.indexs = index;
     });
   },
   activated() {
@@ -175,7 +192,26 @@ export default {
     //获取商品完成上拉加载
     wares() {
       return this.commodity[this.controlvalue];
+    },
+    threshold() {
+      //上拉大于100px时刷新数据
+      return {
+        threshold: -30
+      };
+    },
+    swiper() {
+      return this.$refs.swiper.mySwiper;
     }
+  },
+  watch: {
+    goods(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.$nextTick(() => {
+          this.$refs.scroll.scroll.finishPullUp(); //上拉加载后调用这个函数
+        });
+      }
+    },
+    deep: true //深度监听
   }
 };
 </script>
@@ -185,20 +221,40 @@ export default {
   width: 100%;
   height: 44px;
 }
-.content {
+.content,
+.scrolls {
   position: absolute;
-  top: 44px;
   bottom: 50px;
+  top: 0px;
   left: 0;
   right: 0;
 }
 .navbar {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 10;
 }
 .fixeds {
-  position: relative;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 10;
   box-shadow: 0 1px 2px #eeeeee;
+}
+.applis {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.loading {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  z-index: 999;
 }
 </style>
