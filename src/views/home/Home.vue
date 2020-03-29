@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <load-ing class="loading" :size="24" />
     <tab-control
       :tabcontroltitle="tabcontroltitle"
       @iscontrolvalue="controldata"
@@ -39,7 +40,6 @@
           <goods-list :goods="goods['sell'].list" />
         </div>
       </swiper>
-      <load-ing class="loading" :size="24" />
     </scroll>
     <back-top @click.native="backclick" v-show="show" />
   </div>

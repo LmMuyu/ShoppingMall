@@ -1,7 +1,8 @@
 <template>
   <div id="category">
-    <div v-if="loding">
-      <lod-ing />
+    <div v-if="loding" class="loading">
+      <lod-ing :size="24" />
+      <div class="load">加载中...</div>
     </div>
 
     <div v-if="!loding">
@@ -70,17 +71,21 @@ export default {
       });
     },
     vlaueidnex(maitKey = 3627) {
-      getSubcategory(maitKey).then(({ info, list }) => {
-        this.loding = false
-        const goods = this.categoryShowGoods;
+      getSubcategory(maitKey)
+        .then(({ info, list }) => {
+          this.loding = false;
+          const goods = this.categoryShowGoods;
 
-        goods.categorytitle = info.title;
-        goods.categoryleftmenudata = list;
+          goods.categorytitle = info.title;
+          goods.categoryleftmenudata = list;
 
-        for (let index = 0; index < 3; index++) {
-          this.categorySwiperData.push(list[index]);
-        }
-      });
+          for (let index = 0; index < 3; index++) {
+            this.categorySwiperData.push(list[index]);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     isSearchfor() {
       this.$router.push("category/searchfor").catch(err => {
@@ -127,5 +132,20 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 999;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loading .load {
+  position: relative;
+  top: 24px;
+  left: 8px;
+  font-size: 13px;
+}
+.ivu-dropdown-item{
+  padding: 7px 16px;
 }
 </style>

@@ -6,13 +6,15 @@
   >
     <div id="buy" style>
       <buy-top-nav class="nav" />
-      <Scroll class="scroll">
+      <scroll class="scroll" :bounce="false">
         <buy-address />
         <buy-info class="info" />
         <buy-discount class="discount" />
         <buyTotalPrice class="price" />
-      </Scroll>
-      <buy-submit-bar class="ishebar" @submitOrders="submitOrders" />
+      </scroll>
+      <div class="submitbar">
+        <buy-submit-bar class="ishebar" @submitOrders="submitOrders" />
+      </div>
     </div>
   </transition>
 </template>
@@ -93,5 +95,8 @@ export default {
   position: relative;
   z-index: 10;
   box-shadow: 0 2px 5px #fafafa;
+}
+.submitbar {
+  box-shadow: 0 3px 3px #f0f0f0;
 }
 </style>

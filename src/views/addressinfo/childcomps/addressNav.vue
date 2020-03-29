@@ -19,20 +19,29 @@ export default {
     AppBar
   },
   methods: {
+    routerpath(paths) {
+      this.$router.push(paths).catch(err => {
+        err;
+      });
+    },
     back() {
-      if (this.$route.path === "/addressinfo/addressedit") {
+      const path = this.$route.path;
+
+      if (path === "/addressinfo/addressedit") {
         this.$Dialog
           .confirm({
             message: "是否放弃本次编辑?"
           })
           .then(() => {
-            this.$router.back();
+            this.routerpath("/addressinfo");
           })
           .catch(() => {
             // on cancel
           });
-      } else {
-        this.$router.back();
+      } else if (path === "/addressinfo/addaddress") {
+        this.routerpath("/addressinfo");
+      } else if (path === "/addressinfo") {
+        this.routerpath("/file");
       }
     }
   }

@@ -20,7 +20,9 @@ export default {
   },
   methods: {
     Back() {
-      this.$router.back();
+      this.$router.replace({
+        path: "/file"
+      });
     }
   }
 };

@@ -3,20 +3,25 @@ import {
   EDITADDRESS,
   DELETEADDRESS,
   CANCELCOLLECTION,
-  FAVORITE
+  FAVORITE,
+  GOODSDELETE
 } from "./murations-types.js";
 
 export default {
   addcart(context, payload) {
-    let listdata = context.state.goodslist.find(val => {
-      return val.iid === payload.iid;
-    });
+    return new Promise(resolve => {
+      let listdata = context.state.goodslist.find(val => {
+        return val.iid === payload.iid;
+      });
 
-    if (listdata) {
-      context.commit("islistdata", listdata);
-    } else {
-      context.commit("isaddload", payload);
-    }
+      if (listdata) {
+        context.commit("islistdata", listdata);
+        resolve("商品数量加1");
+      } else {
+        context.commit("isaddload", payload);
+        resolve("已添加到购物车");
+      }
+    });
   },
   cartPlus(context, payload) {
     let plus = context.state.goodslist.find(val => {
@@ -81,6 +86,16 @@ export default {
       context.commit(FAVORITE, payload);
 
       resolve("已收藏");
+    });
+  },
+  [GOODSDELETE](context, payload) {
+    return new Promise(resolve => {
+      const iidindex = context.state.goodslist.findIndex(item => {
+        return item.iid === payload;
+      });
+
+      context.commit(GOODSDELETE, iidindex);
+      resolve("已删除");
     });
   }
 };

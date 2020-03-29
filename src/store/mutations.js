@@ -12,7 +12,8 @@ import {
   GOODSORDER,
   DELETEADDRESS,
   FAVORITE,
-  CANCELCOLLECTION
+  CANCELCOLLECTION,
+  GOODSDELETE
 } from "./murations-types";
 
 export default {
@@ -83,5 +84,8 @@ export default {
   },
   [CANCELCOLLECTION](state, payload) {
     state.favorite.splice(payload, 1);
+  },
+  [GOODSDELETE](state, payload) {
+    state.goodslist.splice(payload, 1);
   }
 };

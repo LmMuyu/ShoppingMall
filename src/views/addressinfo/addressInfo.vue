@@ -6,9 +6,11 @@
   >
     <div id="addressinfo">
       <address-nav class="addressnav" />
-      <div v-if="this.$route.meta.comdisp">
-        <addressinfo-main-body @hineus="hineis" class="mainbody" />
-      </div>
+      <scroll class="scroll" :bounce="false">
+        <div v-if="this.$route.meta.comdisp">
+          <addressinfo-main-body @hineus="hineis" class="mainbody" />
+        </div>
+      </scroll>
 
       <transition
         enter-active-class="animated fadeInRight faster"
@@ -25,11 +27,14 @@
 import addressinfoMainBody from "./childcomps/addressinfoMainBody";
 import addressNav from "./childcomps/addressNav";
 
+import Scroll from "components/content/scroll/Scroll";
+
 export default {
   name: "addressinfo",
   components: {
     addressinfoMainBody,
-    addressNav
+    addressNav,
+    Scroll
   },
   data() {
     return {};
@@ -68,13 +73,6 @@ export default {
   height: 100vh;
   background-color: #ffffff;
 }
-.addressnav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0
-}
 .view,
 .mainbody {
   position: absolute;
@@ -82,5 +80,16 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+}
+.scroll {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.addressnav {
+  position: relative;
+  z-index: 99999;
 }
 </style>

@@ -19,11 +19,11 @@ import Swiper from "swiper";
 
 export default {
   name: "swiper",
-  props:{
-    autoplay:{
-      type:Boolean,
-      default(){
-        return false
+  props: {
+    autoplay: {
+      type: Boolean,
+      default() {
+        return false;
       }
     }
   },
@@ -35,11 +35,11 @@ export default {
   mounted() {
     const _this = this;
     this.mySwiper = new Swiper(".swiper-container", {
-      autoHeight: "auto",
       resistanceRatio: 0,
+      autoHeight: "auto",
       roundLengths: true,
       slidesPerView: "auto",
-      autoplay:this.autoplay,
+      autoplay: this.autoplay,
       mousewheel: {
         forceToAxis: true
       },

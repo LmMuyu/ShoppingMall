@@ -1,6 +1,11 @@
 <template>
   <div id="shoppingitems">
-    <cart-list-item v-for="(item, index) in cartgoodslist" :key="index" :goodsdata="item" />
+    <cart-list-item
+      v-for="(item, index) in cartgoodslist"
+      :key="index"
+      :goodsdata="item"
+      :goodsIndex="index"
+    />
   </div>
 </template>
 

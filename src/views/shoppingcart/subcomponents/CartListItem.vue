@@ -20,10 +20,22 @@
         </span>
       </div>
     </div>
+    <Dropdown trigger="click" style="margin-left: 60px">
+      <a href="javascript:void(0)">
+        <Icon type="md-more" size="24" color="#515a6e" />
+      </a>
+      <DropdownMenu slot="list">
+        <DropdownItem>
+          <span class="delete" @click="isDelete">删除</span>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   </div>
 </template>
 
 <script>
+import { GOODSDELETE } from "@/store/murations-types.js";
+
 export default {
   props: {
     goodsdata: {
@@ -31,11 +43,20 @@ export default {
       default() {
         return {};
       }
+    },
+    goodsIndex: {
+      type: Number,
+      default: null
     }
   },
   methods: {
     DetailJump() {
-      this.$router.push(`/detail/${this.goodsdata.iid}`);
+      this.$router.push({
+        path: "/detail",
+        query: {
+          iid: this.goodsdata.iid
+        }
+      });
     },
     cartPlus() {
       this.$store.dispatch("cartPlus", this.goodsdata);
@@ -47,6 +68,11 @@ export default {
       setTimeout(() => {
         this.$bus.$emit("Activation", this.goodsdata.status);
       }, 20);
+    },
+    isDelete() {
+      this.$store.dispatch(GOODSDELETE, this.goodsdata.iid).then(value => {
+        this.$toast(value);
+      });
     }
   },
   filters: {
@@ -126,5 +152,12 @@ p {
 .rights {
   font-weight: bold;
   margin-left: 4px;
+}
+.delete{
+  display: flex;
+  padding: 5px 20px;
+}
+.ivu-dropdown-item{
+  padding: 0;
 }
 </style>

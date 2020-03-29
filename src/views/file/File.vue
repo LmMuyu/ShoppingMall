@@ -3,11 +3,7 @@
     <div>
       <file-top-features />
       <file-user-info />
-      <file-features
-        class="isfeatures"
-        @fileorder="fileOrder"
-        @favorite="favorite"
-      />
+      <file-features class="isfeatures" @fileorder="fileOrder" @favorite="favorite" />
       <file-sign-out
         class="filesignout"
         @click.native="DeleteWebStorage"
@@ -102,6 +98,7 @@ export default {
         });
     }
   },
+  mounted() {},
   updated() {
     localStorage.getItem("user");
   },

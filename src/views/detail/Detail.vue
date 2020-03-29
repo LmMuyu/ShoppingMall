@@ -79,7 +79,8 @@ export default {
       themeTopy: null,
       indexis: 0, //滚动
       loading: true, //加载中
-      favor: null //收藏
+      favor: null, //收藏
+      comtop: 0 //点击滚到内容组件的位置时取消函数运行
     };
   },
   components: {
@@ -188,7 +189,9 @@ export default {
       goodsdata.lownowprice = this.isgoods.lownowprice;
       goodsdata.date = Date.now();
 
-      this.$store.dispatch("addcart", goodsdata);
+      this.$store.dispatch("addcart", goodsdata).then(value => {
+        this.$toast(value);
+      });
     },
     purchasee() {
       const goodsdata = {};
